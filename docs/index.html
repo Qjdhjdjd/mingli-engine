@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>命理规则引擎 · 传统命理典籍的规则数字化</title>
+<meta name="description" content="从 29 部传统命理典籍中提取 152 条可执行规则，用程序复现古人的推理方式。文化研究用途。">
+<style>
+:root{--bg:#fbf9f5;--card:#fff;--ink:#1f2328;--ink2:#5b6470;--line:#e2ddd4;--accent:#8c2f24;--gold:#a8762a}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+  font-size:15px;line-height:1.7}
+.wrap{max-width:880px;margin:0 auto;padding:52px 24px 64px}
+header{border-bottom:1px solid var(--line);padding-bottom:20px;margin-bottom:30px}
+h1{font-family:Georgia,"Songti SC",serif;font-size:30px;margin:0;letter-spacing:.5px}
+h1 small{display:block;font-size:12px;color:var(--ink2);letter-spacing:2.5px;
+  font-weight:400;margin-top:9px;font-family:inherit}
+.lede{font-size:15.5px;color:var(--ink2);margin:0 0 30px;max-width:660px}
+.lede b{color:var(--ink);font-weight:600}
+.cards{display:grid;gap:12px}
+a.card{display:block;text-decoration:none;color:inherit;background:var(--card);
+  border:1px solid var(--line);border-radius:10px;padding:16px 18px;
+  transition:border-color .15s,box-shadow .15s,transform .15s}
+a.card:hover{border-color:var(--gold);box-shadow:0 2px 12px rgba(168,118,42,.12);transform:translateY(-1px)}
+a.card .t{font-size:15.5px;font-weight:600;display:flex;align-items:center;gap:9px}
+a.card .t .arw{color:var(--gold);font-size:14px;margin-left:auto;font-weight:400}
+a.card .d{font-size:13px;color:var(--ink2);margin-top:4px}
+.tag{font-size:11px;font-weight:600;color:#fff;background:var(--accent);
+  border-radius:4px;padding:1px 7px;letter-spacing:.5px}
+.tag.g{background:var(--gold)}
+.note{margin-top:34px;border:1px solid var(--line);border-left:4px solid var(--accent);
+  border-radius:8px;padding:14px 18px;background:#fdfcf9;font-size:13px;color:var(--ink2)}
+.note b{color:var(--accent)}
+footer{margin-top:34px;padding-top:16px;border-top:1px solid var(--line);
+  font-size:12.5px;color:var(--ink2);display:flex;gap:16px;flex-wrap:wrap}
+footer a{color:var(--gold);text-decoration:none}
+footer a:hover{text-decoration:underline}
+@media(max-width:560px){.wrap{padding:34px 18px 48px}h1{font-size:24px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>命理规则引擎<small>29 部典籍 · 152 条可执行规则</small></h1>
+  </header>
+
+  <p class="lede">
+    把《渊海子平》《三命通会》《滴天髓》这类古籍里<b>可判定的条款</b>抽出来，
+    写成「条件 → 结论」的结构化规则，再由程序逐条匹配、逐条溯源。
+    <b>它复现的是古人的推理方式，不是对现实的预测。</b>
+  </p>
+
+  <div class="cards">
+    <a class="card" href="sample_report.html">
+      <div class="t"><span class="tag g">示例</span>完整排盘报告<span class="arw">→</span></div>
+      <div class="d">一份预先算好的八字报告：四柱排盘、十神藏干、神煞、五行强弱、命中的每条规则及其出处。</div>
+    </a>
+    <a class="card" href="https://github.com/Qjdhjdjd/mingli-engine/blob/main/docs/%E5%85%B8%E7%B1%8D%E8%A7%84%E5%88%99%E6%8F%90%E5%8F%96%E8%A1%A8.md">
+      <div class="t"><span class="tag">核心</span>典籍规则提取表<span class="arw">→</span></div>
+      <div class="d">29 部典籍逐条列出：书名、年代、体系、规则条件、吉凶分值、置信度。附跨典籍共识规则。</div>
+    </a>
+    <a class="card" href="https://github.com/Qjdhjdjd/mingli-engine/blob/main/docs/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E8%A7%A3%E8%AF%BB%E8%AF%B4%E6%98%8E.md">
+      <div class="t"><span class="tag">说明</span>大模型解读层怎么做的<span class="arw">→</span></div>
+      <div class="d">模型只负责把规则结果讲成人话，吉凶仍由引擎产生；生成后由程序校验编号、分值与绝对化措辞。</div>
+    </a>
+    <a class="card" href="https://github.com/Qjdhjdjd/mingli-engine">
+      <div class="t"><span class="tag">源码</span>项目仓库<span class="arw">→</span></div>
+      <div class="d">零依赖 Python 实现：节气天文推算、规则引擎、五套分析器、本地 Web 界面与命令行。</div>
+    </a>
+  </div>
+
+  <div class="note">
+    <b>关于这份东西能做什么。</b>
+    排盘精度可以做到分钟级、每条结论可以回指到具体书名，这些是可核对的。
+    但「由此可以推断人生」这一步，是文献的断言，不是程序的推导。
+    <b>请当作文化研究与娱乐，不要用它决定就医、签约、投资这类真事。</b>
+    交互式界面需要本地运行 Python 后端，本页只提供静态示例。
+  </div>
+
+  <footer>
+    <span>文化研究用途 · 非预测工具</span>
+    <a href="https://github.com/Qjdhjdjd/mingli-engine">github.com/Qjdhjdjd/mingli-engine</a>
+  </footer>
+</div>
+</body>
+</html>
