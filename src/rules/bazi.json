@@ -1,0 +1,2167 @@
+{
+  "meta": {
+    "version": "1.0",
+    "scope": "子平八字体系",
+    "book_count": 19,
+    "note": "规则为公开典籍主张的结构化改写，非原文逐字摘录。confidence A=多源一致可查，B=单一整理资料需复核，C=后世归纳。"
+  },
+  "rules": [
+    {
+      "id": "LJZ-01",
+      "book": "李虚中命书",
+      "system": "bazi",
+      "section": "论纳音",
+      "title": "年纳音生日纳音",
+      "when": {
+        "nayin_relation": {
+          "from": 0,
+          "to": 2,
+          "type": "生"
+        }
+      },
+      "then": {
+        "topic": "根基",
+        "verdict": "吉",
+        "score": 2,
+        "text": "古法以年为本、以日为身，年纳音生日纳音，主祖上荫庇、根基得其滋养。"
+      },
+      "confidence": "B",
+      "note": "唐代古法重纳音，宋以后子平渐轻此说。"
+    },
+    {
+      "id": "LJZ-02",
+      "book": "李虚中命书",
+      "system": "bazi",
+      "section": "论纳音",
+      "title": "年纳音克日纳音",
+      "when": {
+        "nayin_relation": {
+          "from": 0,
+          "to": 2,
+          "type": "克"
+        }
+      },
+      "then": {
+        "topic": "根基",
+        "verdict": "凶",
+        "score": -2,
+        "text": "年纳音克日纳音，古法谓祖业难承、少年多受约束，须自力更生。"
+      },
+      "confidence": "B",
+      "note": "同上，属纳音古法，非子平主流。"
+    },
+    {
+      "id": "LJZ-03",
+      "book": "李虚中命书",
+      "system": "bazi",
+      "section": "三命通论",
+      "title": "三命纳音连珠相生",
+      "when": {
+        "nayin_chain_sheng": {
+          "start": 0,
+          "end": 2
+        }
+      },
+      "then": {
+        "topic": "根基",
+        "verdict": "吉",
+        "score": 3,
+        "text": "年、月、日纳音依次相生，谓之连珠，古法以为气脉贯通、一生少阻断。"
+      },
+      "confidence": "B"
+    },
+    {
+      "id": "YZ-01",
+      "book": "玉照定真经",
+      "system": "bazi",
+      "section": "纳音篇",
+      "title": "年日纳音比和",
+      "when": {
+        "nayin_relation": {
+          "from": 0,
+          "to": 2,
+          "type": "同"
+        }
+      },
+      "then": {
+        "topic": "根基",
+        "verdict": "平",
+        "score": 1,
+        "text": "年日纳音同气，主性情与本家相近，守成有余而开拓不足。"
+      },
+      "confidence": "B"
+    },
+    {
+      "id": "YZ-02",
+      "book": "玉照定真经",
+      "system": "bazi",
+      "section": "神煞篇",
+      "title": "年日地支相冲",
+      "when": {
+        "pillar_chong": [
+          0,
+          2
+        ]
+      },
+      "then": {
+        "topic": "六亲",
+        "verdict": "凶",
+        "score": -2,
+        "text": "年支与日支相冲，古法主离祖别乡、与长辈缘分聚少离多。"
+      },
+      "confidence": "B"
+    },
+    {
+      "id": "YZ-03",
+      "book": "玉照定真经",
+      "system": "bazi",
+      "section": "纳音篇",
+      "title": "时纳音生年纳音",
+      "when": {
+        "nayin_relation": {
+          "from": 3,
+          "to": 0,
+          "type": "生"
+        }
+      },
+      "then": {
+        "topic": "晚运",
+        "verdict": "吉",
+        "score": 2,
+        "text": "时柱纳音生年柱，主晚运回护本根，子女晚辈有助于己。"
+      },
+      "confidence": "B"
+    },
+    {
+      "id": "LL-01",
+      "book": "珞琭子三命消息赋",
+      "system": "bazi",
+      "section": "消息赋",
+      "title": "日主得月令之气",
+      "when": {
+        "all": [
+          {
+            "strength": [
+              "身强"
+            ]
+          },
+          {
+            "month_branch_element": [
+              "木",
+              "火",
+              "土",
+              "金",
+              "水"
+            ]
+          }
+        ]
+      },
+      "then": {
+        "topic": "气势",
+        "verdict": "吉",
+        "score": 2,
+        "text": "日主秉月令之气而旺，谓之得时，主行事有底气、能任事。"
+      },
+      "confidence": "B"
+    },
+    {
+      "id": "LL-02",
+      "book": "珞琭子三命消息赋",
+      "system": "bazi",
+      "section": "消息赋",
+      "title": "一行独旺，气失消息",
+      "when": {
+        "element_extreme": {
+          "op": ">",
+          "value": 45
+        }
+      },
+      "then": {
+        "topic": "气势",
+        "verdict": "凶",
+        "score": -2,
+        "text": "一行独旺逾四成五，谓之偏枯。古法主张「消息」——损有余、补不足，否则易见偏执之患。"
+      },
+      "confidence": "B"
+    },
+    {
+      "id": "LL-03",
+      "book": "珞琭子三命消息赋",
+      "system": "bazi",
+      "section": "消息赋",
+      "title": "日主无根",
+      "when": {
+        "all": [
+          {
+            "strength": [
+              "身弱"
+            ]
+          },
+          {
+            "element_extreme": {
+              "op": ">",
+              "value": 40
+            }
+          }
+        ]
+      },
+      "then": {
+        "topic": "气势",
+        "verdict": "凶",
+        "score": -2,
+        "text": "日主衰而他行独盛，谓之无根受制，主劳而少成，宜借时运。"
+      },
+      "confidence": "B"
+    },
+    {
+      "id": "YHP-001",
+      "book": "渊海子平",
+      "system": "bazi",
+      "section": "继善篇",
+      "title": "伤官见官",
+      "when": {
+        "all": [
+          {
+            "ten_god_in_stems": "伤官"
+          },
+          {
+            "ten_god_present": "正官"
+          }
+        ]
+      },
+      "then": {
+        "topic": "事业",
+        "verdict": "凶",
+        "score": -3,
+        "text": "伤官见官，为祸百端。古法谓易招是非争讼、仕途阻滞，女命尤忌。"
+      },
+      "confidence": "A",
+      "note": "《渊海子平·继善篇》名句，诸家子平书皆承此说。"
+    },
+    {
+      "id": "YHP-002",
+      "book": "渊海子平",
+      "system": "bazi",
+      "section": "定格局",
+      "title": "财官印食俱全",
+      "when": {
+        "all": [
+          {
+            "ten_god_present": "正财"
+          },
+          {
+            "ten_god_present": "正官"
+          },
+          {
+            "ten_god_present": "正印"
+          },
+          {
+            "ten_god_present": "食神"
+          }
+        ]
+      },
+      "then": {
+        "topic": "格局",
+        "verdict": "吉",
+        "score": 3,
+        "text": "财、官、印、食四吉神俱备而不相战，古法以为格局周全，主一生衣食、名位可期。"
+      },
+      "confidence": "A"
+    },
+    {
+      "id": "YHP-003",
+      "book": "渊海子平",
+      "system": "bazi",
+      "section": "论羊刃",
+      "title": "羊刃逢冲",
+      "when": {
+        "all": [
+          {
+            "shensha": "羊刃"
+          },
+          {
+            "relation": {
+              "type": "冲"
+            }
+          }
+        ]
+      },
+      "then": {
+        "topic": "健康",
+        "verdict": "凶",
+        "score": -3,
+        "text": "羊刃逢冲，古谓「九死一生」。主性烈易冲动，须防外伤、手术与突发争执。"
+      },
+      "confidence": "A"
+    },
+    {
+      "id": "YHP-004",
+      "book": "渊海子平",
+      "system": "bazi",
+      "section": "论正官",
+      "title": "正官格无伤",
+      "when": {
+        "all": [
+          {
+            "pattern": "正官格"
+          },
+          {
+            "not": {
+              "ten_god_present": "伤官"
+            }
+          }
+        ]
+      },
+      "then": {
+        "topic": "事业",
+        "verdict": "吉",
+        "score": 3,
+        "text": "月令正官，格清而无伤官之破，主循规守正、宜公职与管理之途。"
+      },
+      "confidence": "A"
+    },
+    {
+      "id": "YHP-005",
+      "book": "渊海子平",
+      "system": "bazi",
+      "section": "论财",
+      "title": "身弱财多",
+      "when": {
+        "all": [
+          {
+            "strength": [
+              "身弱"
+            ]
+          },
+          {
+            "ten_god_count": {
+              "name": "正财",
+              "op": ">=",
+              "value": 2
+            }
+          }
+        ]
+      },
+      "then": {
+        "topic": "财运",
+        "verdict": "凶",
+        "score": -3,
+        "text": "身弱而财重，谓之「财多身弱，富屋贫人」。主见财而无力任之，易因财生累。"
+      },
+      "confidence": "A"
+    },
+    {
+      "id": "YHP-006",
+      "book": "渊海子平",
+      "system": "bazi",
+      "section": "论七杀",
+      "title": "食神制杀",
+      "when": {
+        "all": [
+          {
+            "ten_god_present": "七杀"
+          },
+          {
+            "ten_god_present": "食神"
+          },
+          {
+            "not": {
+              "strength": [
+                "身弱"
+              ]
+            }
+          }
+        ]
+      },
+      "then": {
+        "topic": "事业",
+        "verdict": "吉",
+        "score": 3,
+        "text": "七杀有食神制之，谓之「杀有制化」，主能任压力、化竞争为权柄。"
+      },
+      "confidence": "A"
+    },
+    {
+      "id": "YHP-007",
+      "book": "渊海子平",
+      "system": "bazi",
+      "section": "论贵人",
+      "title": "天乙贵人临身",
+      "when": {
+        "shensha": "天乙贵人"
+      },
+      "then": {
+        "topic": "贵人",
+        "verdict": "吉",
+        "score": 1,
+        "text": "命带天乙贵人，为诸神之首。古谓遇难有人相扶。惟此星覆盖面广，只宜作辅助参看。"
+      },
+      "confidence": "A"
+    },
+    {
+      "id": "WXJ-01",
+      "book": "五行精纪",
+      "system": "bazi",
+      "section": "纳音篇",
+      "title": "纳音同气",
+      "when": {
+        "nayin_relation": {
+          "from": 1,
+          "to": 3,
+          "type": "同"
+        }
+      },
+      "then": {
+        "topic": "气势",
+        "verdict": "平",
+        "score": 1,
+        "text": "月、时纳音同气，主中年至晚年路数一贯，少转折而多守成。"
+      },
+      "confidence": "B"
+    },
+    {
+      "id": "WXJ-02",
+      "book": "五行精纪",
+      "system": "bazi",
+      "section": "神煞篇",
+      "title": "神煞混杂",
+      "when": {
+        "shensha_count": {
+          "op": ">=",
+          "value": 9
+        }
+      },
+      "then": {
+        "topic": "综合",
+        "verdict": "平",
+        "score": 0,
+        "text": "神煞叠加过多（九项以上），古法已明言当以格局喜忌为主，不可逐条认领，否则自相矛盾。"
+      },
+      "confidence": "A",
+      "note": "此条为判读原则而非具体吉凶，score 置 0。"
+    },
+    {
+      "id": "WXJ-03",
+      "book": "五行精纪",
+      "system": "bazi",
+      "section": "五行篇",
+      "title": "五行偏缺",
+      "when": {
+        "any": [
+          {
+            "missing_element": "木"
+          },
+          {
+            "missing_element": "火"
+          },
+          {
+            "missing_element": "土"
+          },
+          {
+            "missing_element": "金"
+          },
+          {
+            "missing_element": "水"
+          }
+        ]
+      },
+      "then": {
+        "topic": "气势",
+        "verdict": "平",
+        "score": -1,
+        "text": "四柱五行有所偏缺，气脉不周。古法主张视所缺是否为喜用，缺喜用则须补，缺忌神反为清。"
+      },
+      "confidence": "B"
+    },
+    {
+      "id": "SMT-001",
+      "book": "三命通会",
+      "system": "bazi",
+      "section": "论禄",
+      "title": "日干坐禄",
+      "when": {
+        "shensha": "禄神"
+      },
+      "then": {
+        "topic": "根基",
+        "verdict": "吉",
+        "score": 2,
+        "text": "日干得禄，谓之有根。主自立能力强，衣食有靠，不轻易受制于人。"
+      },
+      "confidence": "A"
+    },
+    {
+      "id": "SMT-002",
+      "book": "三命通会",
+      "system": "bazi",
+      "section": "论时",
+      "title": "时柱见财官",
+      "when": {
+        "all": [
+          {
+            "any": [
+              {
+                "ten_god_count": {
+                  "name": "正财",
+                  "op": ">=",
+                  "value": 1
+                }
+              },
+              {
+                "ten_god_count": {
+                  "name": "正官",
+                  "op": ">=",
+                  "value": 1
+                }
+              }
+            ]
+          },
+          {
+            "strength": [
+              "身强"
+            ]
+          }
+        ]
+      },
+      "then": {
+        "topic": "晚运",
+        "verdict": "吉",
+        "score": 2,
+        "text": "身强而时柱见财官，主晚运得力，子女有成或晚年名位不衰。"
+      },
+      "confidence": "B"
+    },
+    {
+      "id": "SMT-003",
+      "book": "三命通会",
+      "system": "bazi",
+      "section": "论魁罡",
+      "title": "魁罡日",
+      "when": {
+        "shensha": "魁罡"
+      },
+      "then": {
+        "topic": "性格",
+        "verdict": "中性",
+        "score": 0,
+        "text": "魁罡主人性刚果断、聪明好权，然多起伏。女命古法谓过刚，今不作定论。"
+      },
+      "confidence": "A"
+    },
+    {
+      "id": "SMT-004",
+      "book": "三命通会",
+      "system": "bazi",
+      "section": "论败日",
+      "title": "十恶大败",
+      "when": {
+        "shensha": "十恶大败"
+      },
+      "then": {
+        "topic": "财运",
+        "verdict": "凶",
+        "score": -2,
+        "text": "日柱犯十恶大败，古谓财禄易散、成而复败。须以格局与用神救之，不可独断。"
+      },
+      "confidence": "B"
+    },
+    {
+      "id": "SMT-005",
+      "book": "三命通会",
+      "system": "bazi",
+      "section": "五行四时宜忌",
+      "title": "月令与日主同气",
+      "when": {
+        "all": [
+          {
+            "month_branch_element": [
+              "木"
+            ]
+          },
+          {
+            "day_master_element": "木"
+          }
+        ]
+      },
+      "then": {
+        "topic": "气势",
+        "verdict": "吉",
+        "score": 1,
+        "text": "日主与月令同气，得时得地。春木逢春、秋金逢秋之类，主本气充足。"
+      },
+      "confidence": "B"
+    },
+    {
+      "id": "SF-01",
+      "book": "神峰通考",
+      "system": "bazi",
+      "section": "病药说",
+      "title": "日主过旺为病",
+      "when": {
+        "all": [
+          {
+            "element_extreme": {
+              "op": ">",
+              "value": 50
+            }
+          },
+          {
+            "strength": [
+              "身强"
+            ]
+          }
+        ]
+      },
+      "then": {
+        "topic": "格局",
+        "verdict": "凶",
+        "score": -2,
+        "text": "日主过旺而无泄无制，是为「病」。古法主张寻「药」——以财官食伤损其有余。"
+      },
+      "confidence": "A"
+    },
+    {
+      "id": "SF-02",
+      "book": "神峰通考",
+      "system": "bazi",
+      "section": "病药说",
+      "title": "日主过弱为病",
+      "when": {
+        "all": [
+          {
+            "strength": [
+              "身弱"
+            ]
+          },
+          {
+            "not": {
+              "any": [
+                {
+                  "ten_god_present": "正印"
+                },
+                {
+                  "ten_god_present": "偏印"
+                },
+                {
+                  "ten_god_present": "比肩"
+                },
+                {
+                  "ten_god_present": "劫财"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "then": {
+        "topic": "格局",
+        "verdict": "凶",
+        "score": -2,
+        "text": "日主过弱而印比俱无，是为「病」。须得生扶之「药」，否则难任财官。"
+      },
+      "confidence": "A"
+    },
+    {
+      "id": "SF-03",
+      "book": "神峰通考",
+      "system": "bazi",
+      "section": "病药说",
+      "title": "病轻得药",
+      "when": {
+        "all": [
+          {
+            "strength": [
+              "中和",
+              "中和偏强",
+              "中和偏弱"
+            ]
+          },
+          {
+            "element_balanced": {
+              "op": "<",
+              "value": 30
+            }
+          }
+        ]
+      },
+      "then": {
+        "topic": "格局",
+        "verdict": "吉",
+        "score": 2,
+        "text": "五行较为均停，病轻而得药，主一生波折有限、遇事易解。"
+      },
+      "confidence": "B"
+    },
+    {
+      "id": "SF-04",
+      "book": "神峰通考",
+      "system": "bazi",
+      "section": "病药说",
+      "title": "有病无药",
+      "when": {
+        "all": [
+          {
+            "element_extreme": {
+              "op": ">",
+              "value": 44
+            }
+          },
+          {
+            "strength": [
+              "身弱"
+            ]
+          },
+          {
+            "missing_element": [
+              "金"
+            ]
+          }
+        ]
+      },
+      "then": {
+        "topic": "格局",
+        "verdict": "凶",
+        "score": -2,
+        "text": "病重而药不现，古法谓一生多阻、所求难遂，须待大运流年补其药。"
+      },
+      "confidence": "B"
+    },
+    {
+      "id": "XPH-01",
+      "book": "星平会海",
+      "system": "bazi",
+      "section": "论官印",
+      "title": "官印相生",
+      "when": {
+        "all": [
+          {
+            "ten_god_in_stems": "正官"
+          },
+          {
+            "ten_god_present": "正印"
+          },
+          {
+            "not": {
+              "strength": [
+                "身弱"
+              ]
+            }
+          }
+        ]
+      },
+      "then": {
+        "topic": "事业",
+        "verdict": "吉",
+        "score": 3,
+        "text": "官印相生，主有名位而能守，宜文教、公职、管理之途，行事有章法。"
+      },
+      "confidence": "A"
+    },
+    {
+      "id": "XPH-02",
+      "book": "星平会海",
+      "system": "bazi",
+      "section": "论财印",
+      "title": "财星坏印",
+      "when": {
+        "all": [
+          {
+            "ten_god_count": {
+              "name": "正财",
+              "op": ">=",
+              "value": 2
+            }
+          },
+          {
+            "ten_god_present": "正印"
+          },
+          {
+            "strength": [
+              "身弱"
+            ]
+          }
+        ]
+      },
+      "then": {
+        "topic": "学业",
+        "verdict": "凶",
+        "score": -2,
+        "text": "财旺坏印，古谓「贪财坏印」。主早年学业易中断，或因实务而弃学。"
+      },
+      "confidence": "A"
+    },
+    {
+      "id": "LT-01",
+      "book": "兰台妙选",
+      "system": "bazi",
+      "section": "纳音格局",
+      "title": "纳音相生带三合",
+      "when": {
+        "all": [
+          {
+            "nayin_chain_sheng": {
+              "start": 0,
+              "end": 2
+            }
+          },
+          {
+            "relation": {
+              "type": "三合"
+            }
+          }
+        ]
+      },
+      "then": {
+        "topic": "格局",
+        "verdict": "吉",
+        "score": 3,
+        "text": "纳音相生而地支成三合局，古法列为清贵之格，主气脉贯通、得力于众。"
+      },
+      "confidence": "C",
+      "note": "《兰台妙选》多列纳音格局名目，此处取其结构共性归纳，非原文单条。"
+    },
+    {
+      "id": "LT-02",
+      "book": "兰台妙选",
+      "system": "bazi",
+      "section": "纳音格局",
+      "title": "纳音相克",
+      "when": {
+        "all": [
+          {
+            "nayin_relation": {
+              "from": 1,
+              "to": 2,
+              "type": "克"
+            }
+          },
+          {
+            "relation": {
+              "type": "冲"
+            }
+          }
+        ]
+      },
+      "then": {
+        "topic": "格局",
+        "verdict": "凶",
+        "score": -2,
+        "text": "纳音相克而地支又冲，主内外不一、变动频仍，古法以为格局不清。"
+      },
+      "confidence": "C"
+    },
+    {
+      "id": "YD-01",
+      "book": "御定子平",
+      "system": "bazi",
+      "section": "论建禄",
+      "title": "月令建禄",
+      "when": {
+        "pattern": "建禄格"
+      },
+      "then": {
+        "topic": "格局",
+        "verdict": "平",
+        "score": 0,
+        "text": "月令建禄，日主有根而月令无可用之神，须于四柱另寻财官方成格局。"
+      },
+      "confidence": "A"
+    },
+    {
+      "id": "YD-02",
+      "book": "御定子平",
+      "system": "bazi",
+      "section": "论用神",
+      "title": "月令无用神",
+      "when": {
+        "all": [
+          {
+            "pattern": "建禄格"
+          },
+          {
+            "not": {
+              "ten_god_present": "正官"
+            }
+          },
+          {
+            "not": {
+              "ten_god_present": "正财"
+            }
+          }
+        ]
+      },
+      "then": {
+        "topic": "格局",
+        "verdict": "凶",
+        "score": -2,
+        "text": "建禄而无财官可用，谓之「格局无取」，主一生平顺而无显著成就。"
+      },
+      "confidence": "B"
+    },
+    {
+      "id": "ZP-01",
+      "book": "子平真诠",
+      "system": "bazi",
+      "section": "论正官",
+      "title": "正官格被伤",
+      "when": {
+        "all": [
+          {
+            "pattern": "正官格"
+          },
+          {
+            "ten_god_present": "伤官"
+          },
+          {
+            "not": {
+              "ten_god_present": "正印"
+            }
+          }
+        ]
+      },
+      "then": {
+        "topic": "事业",
+        "verdict": "凶",
+        "score": -3,
+        "text": "正官格见伤官而无印以制，谓之破格。主名利多阻，宜守不宜攻。"
+      },
+      "confidence": "A"
+    },
+    {
+      "id": "ZP-02",
+      "book": "子平真诠",
+      "system": "bazi",
+      "section": "论正官",
+      "title": "官格配印",
+      "when": {
+        "all": [
+          {
+            "pattern": "正官格"
+          },
+          {
+            "ten_god_present": "正印"
+          }
+        ]
+      },
+      "then": {
+        "topic": "事业",
+        "verdict": "吉",
+        "score": 3,
+        "text": "正官格得印为相神，官印双全。主名位稳固，宜体制内发展。"
+      },
+      "confidence": "A"
+    },
+    {
+      "id": "ZP-03",
+      "book": "子平真诠",
+      "system": "bazi",
+      "section": "论七杀",
+      "title": "七杀格有制",
+      "when": {
+        "all": [
+          {
+            "pattern": "七杀格"
+          },
+          {
+            "any": [
+              {
+                "ten_god_present": "食神"
+              },
+              {
+                "ten_god_present": "正印"
+              }
+            ]
+          }
+        ]
+      },
+      "then": {
+        "topic": "事业",
+        "verdict": "吉",
+        "score": 3,
+        "text": "七杀格得食神制或印化，谓之成格。主能担重任，于竞争中立威。"
+      },
+      "confidence": "A"
+    },
+    {
+      "id": "ZP-04",
+      "book": "子平真诠",
+      "system": "bazi",
+      "section": "论财",
+      "title": "财格遇劫",
+      "when": {
+        "all": [
+          {
+            "pattern": "财格"
+          },
+          {
+            "ten_god_present": "劫财"
+          },
+          {
+            "not": {
+              "ten_god_present": "正官"
+            }
+          }
+        ]
+      },
+      "then": {
+        "topic": "财运",
+        "verdict": "凶",
+        "score": -2,
+        "text": "财格见劫财而无官制，主破耗、合伙易生纠纷，宜独营慎贷。"
+      },
+      "confidence": "A"
+    },
+    {
+      "id": "ZP-05",
+      "book": "子平真诠",
+      "system": "bazi",
+      "section": "论相神",
+      "title": "相神有力",
+      "when": {
+        "all": [
+          {
+            "strength": [
+              "中和偏强",
+              "中和"
+            ]
+          },
+          {
+            "ten_god_count": {
+              "name": "正印",
+              "op": ">=",
+              "value": 1
+            }
+          },
+          {
+            "ten_god_count": {
+              "name": "正官",
+              "op": ">=",
+              "value": 1
+            }
+          }
+        ]
+      },
+      "then": {
+        "topic": "格局",
+        "verdict": "吉",
+        "score": 2,
+        "text": "格局有相神护卫而不孤，主一生有依托，遇事得人相助。"
+      },
+      "confidence": "B"
+    },
+    {
+      "id": "DT-01",
+      "book": "滴天髓",
+      "system": "bazi",
+      "section": "衰旺",
+      "title": "身强喜泄",
+      "when": {
+        "all": [
+          {
+            "strength": [
+              "身强"
+            ]
+          },
+          {
+            "any": [
+              {
+                "ten_god_present": "食神"
+              },
+              {
+                "ten_god_present": "伤官"
+              }
+            ]
+          }
+        ]
+      },
+      "then": {
+        "topic": "气势",
+        "verdict": "吉",
+        "score": 2,
+        "text": "身旺而食伤得用，气有出路。主才华可展，宜技艺、创作、表达之途。"
+      },
+      "confidence": "A"
+    },
+    {
+      "id": "DT-02",
+      "book": "滴天髓",
+      "system": "bazi",
+      "section": "衰旺",
+      "title": "身弱喜生扶",
+      "when": {
+        "all": [
+          {
+            "strength": [
+              "身弱"
+            ]
+          },
+          {
+            "any": [
+              {
+                "ten_god_present": "正印"
+              },
+              {
+                "ten_god_present": "比肩"
+              }
+            ]
+          }
+        ]
+      },
+      "then": {
+        "topic": "气势",
+        "verdict": "吉",
+        "score": 2,
+        "text": "身弱而印比有根，谓之得扶。主虽劳而有援，宜借力而行、不宜独闯。"
+      },
+      "confidence": "A"
+    },
+    {
+      "id": "DT-03",
+      "book": "滴天髓",
+      "system": "bazi",
+      "section": "寒暖",
+      "title": "冬生无火",
+      "when": {
+        "all": [
+          {
+            "month_branch": [
+              "亥",
+              "子",
+              "丑"
+            ]
+          },
+          {
+            "missing_element": [
+              "火"
+            ]
+          }
+        ]
+      },
+      "then": {
+        "topic": "健康",
+        "verdict": "凶",
+        "score": -2,
+        "text": "冬生而全局无火，谓之寒木寒金，气机不畅。古法以调候为急，主畏寒、易郁。"
+      },
+      "confidence": "A"
+    },
+    {
+      "id": "DT-04",
+      "book": "滴天髓",
+      "system": "bazi",
+      "section": "寒暖",
+      "title": "夏生无水",
+      "when": {
+        "all": [
+          {
+            "month_branch": [
+              "巳",
+              "午",
+              "未"
+            ]
+          },
+          {
+            "missing_element": [
+              "水"
+            ]
+          }
+        ]
+      },
+      "then": {
+        "topic": "健康",
+        "verdict": "凶",
+        "score": -2,
+        "text": "夏生而全局无水，谓之燥烈。古法主性急、易上火，须以水润之。"
+      },
+      "confidence": "A"
+    },
+    {
+      "id": "DT-05",
+      "book": "滴天髓",
+      "system": "bazi",
+      "section": "源流",
+      "title": "五行流通",
+      "when": {
+        "all": [
+          {
+            "element_balanced": {
+              "op": "<",
+              "value": 22
+            }
+          },
+          {
+            "strength": [
+              "中和",
+              "中和偏强",
+              "中和偏弱"
+            ]
+          }
+        ]
+      },
+      "then": {
+        "topic": "气势",
+        "verdict": "吉",
+        "score": 3,
+        "text": "五行流通、强弱均停，谓之「源远流长」。主一生少大起大落，遇事有回旋。"
+      },
+      "confidence": "A"
+    },
+    {
+      "id": "QT-001",
+      "book": "穷通宝鉴",
+      "system": "bazi",
+      "section": "甲木喜用提要",
+      "title": "甲木调候得用",
+      "when": {
+        "all": [
+          {
+            "day_master": "甲"
+          },
+          {
+            "tiaohou_hit": {
+              "rank": 1
+            }
+          }
+        ]
+      },
+      "then": {
+        "topic": "格局",
+        "verdict": "吉",
+        "score": 2,
+        "text": "第一调候用神现于命局，寒暖燥湿得宜，气数不偏，主根基调润、进退有度。"
+      },
+      "confidence": "A"
+    },
+    {
+      "id": "QT-002",
+      "book": "穷通宝鉴",
+      "system": "bazi",
+      "section": "甲木喜用提要",
+      "title": "甲木调候失令",
+      "when": {
+        "all": [
+          {
+            "day_master": "甲"
+          },
+          {
+            "not": {
+              "tiaohou_hit": {
+                "rank": 1
+              }
+            }
+          }
+        ]
+      },
+      "then": {
+        "topic": "格局",
+        "verdict": "凶",
+        "score": -1,
+        "text": "第一调候用神未现，寒暖燥湿有所偏，须待大运流年补之（非谓命局全无此五行）。"
+      },
+      "confidence": "A"
+    },
+    {
+      "id": "QT-003",
+      "book": "穷通宝鉴",
+      "system": "bazi",
+      "section": "乙木喜用提要",
+      "title": "乙木调候得用",
+      "when": {
+        "all": [
+          {
+            "day_master": "乙"
+          },
+          {
+            "tiaohou_hit": {
+              "rank": 1
+            }
+          }
+        ]
+      },
+      "then": {
+        "topic": "格局",
+        "verdict": "吉",
+        "score": 2,
+        "text": "第一调候用神现于命局，寒暖燥湿得宜，气数不偏，主根基调润、进退有度。"
+      },
+      "confidence": "A"
+    },
+    {
+      "id": "QT-004",
+      "book": "穷通宝鉴",
+      "system": "bazi",
+      "section": "乙木喜用提要",
+      "title": "乙木调候失令",
+      "when": {
+        "all": [
+          {
+            "day_master": "乙"
+          },
+          {
+            "not": {
+              "tiaohou_hit": {
+                "rank": 1
+              }
+            }
+          }
+        ]
+      },
+      "then": {
+        "topic": "格局",
+        "verdict": "凶",
+        "score": -1,
+        "text": "第一调候用神未现，寒暖燥湿有所偏，须待大运流年补之（非谓命局全无此五行）。"
+      },
+      "confidence": "A"
+    },
+    {
+      "id": "QT-005",
+      "book": "穷通宝鉴",
+      "system": "bazi",
+      "section": "丙火喜用提要",
+      "title": "丙火调候得用",
+      "when": {
+        "all": [
+          {
+            "day_master": "丙"
+          },
+          {
+            "tiaohou_hit": {
+              "rank": 1
+            }
+          }
+        ]
+      },
+      "then": {
+        "topic": "格局",
+        "verdict": "吉",
+        "score": 2,
+        "text": "第一调候用神现于命局，寒暖燥湿得宜，气数不偏，主根基调润、进退有度。"
+      },
+      "confidence": "A"
+    },
+    {
+      "id": "QT-006",
+      "book": "穷通宝鉴",
+      "system": "bazi",
+      "section": "丙火喜用提要",
+      "title": "丙火调候失令",
+      "when": {
+        "all": [
+          {
+            "day_master": "丙"
+          },
+          {
+            "not": {
+              "tiaohou_hit": {
+                "rank": 1
+              }
+            }
+          }
+        ]
+      },
+      "then": {
+        "topic": "格局",
+        "verdict": "凶",
+        "score": -1,
+        "text": "第一调候用神未现，寒暖燥湿有所偏，须待大运流年补之（非谓命局全无此五行）。"
+      },
+      "confidence": "A"
+    },
+    {
+      "id": "QT-007",
+      "book": "穷通宝鉴",
+      "system": "bazi",
+      "section": "丁火喜用提要",
+      "title": "丁火调候得用",
+      "when": {
+        "all": [
+          {
+            "day_master": "丁"
+          },
+          {
+            "tiaohou_hit": {
+              "rank": 1
+            }
+          }
+        ]
+      },
+      "then": {
+        "topic": "格局",
+        "verdict": "吉",
+        "score": 2,
+        "text": "第一调候用神现于命局，寒暖燥湿得宜，气数不偏，主根基调润、进退有度。"
+      },
+      "confidence": "A"
+    },
+    {
+      "id": "QT-008",
+      "book": "穷通宝鉴",
+      "system": "bazi",
+      "section": "丁火喜用提要",
+      "title": "丁火调候失令",
+      "when": {
+        "all": [
+          {
+            "day_master": "丁"
+          },
+          {
+            "not": {
+              "tiaohou_hit": {
+                "rank": 1
+              }
+            }
+          }
+        ]
+      },
+      "then": {
+        "topic": "格局",
+        "verdict": "凶",
+        "score": -1,
+        "text": "第一调候用神未现，寒暖燥湿有所偏，须待大运流年补之（非谓命局全无此五行）。"
+      },
+      "confidence": "A"
+    },
+    {
+      "id": "QT-009",
+      "book": "穷通宝鉴",
+      "system": "bazi",
+      "section": "戊土喜用提要",
+      "title": "戊土调候得用",
+      "when": {
+        "all": [
+          {
+            "day_master": "戊"
+          },
+          {
+            "tiaohou_hit": {
+              "rank": 1
+            }
+          }
+        ]
+      },
+      "then": {
+        "topic": "格局",
+        "verdict": "吉",
+        "score": 2,
+        "text": "第一调候用神现于命局，寒暖燥湿得宜，气数不偏，主根基调润、进退有度。"
+      },
+      "confidence": "A"
+    },
+    {
+      "id": "QT-010",
+      "book": "穷通宝鉴",
+      "system": "bazi",
+      "section": "戊土喜用提要",
+      "title": "戊土调候失令",
+      "when": {
+        "all": [
+          {
+            "day_master": "戊"
+          },
+          {
+            "not": {
+              "tiaohou_hit": {
+                "rank": 1
+              }
+            }
+          }
+        ]
+      },
+      "then": {
+        "topic": "格局",
+        "verdict": "凶",
+        "score": -1,
+        "text": "第一调候用神未现，寒暖燥湿有所偏，须待大运流年补之（非谓命局全无此五行）。"
+      },
+      "confidence": "A"
+    },
+    {
+      "id": "QT-011",
+      "book": "穷通宝鉴",
+      "system": "bazi",
+      "section": "己土喜用提要",
+      "title": "己土调候得用",
+      "when": {
+        "all": [
+          {
+            "day_master": "己"
+          },
+          {
+            "tiaohou_hit": {
+              "rank": 1
+            }
+          }
+        ]
+      },
+      "then": {
+        "topic": "格局",
+        "verdict": "吉",
+        "score": 2,
+        "text": "第一调候用神现于命局，寒暖燥湿得宜，气数不偏，主根基调润、进退有度。"
+      },
+      "confidence": "A"
+    },
+    {
+      "id": "QT-012",
+      "book": "穷通宝鉴",
+      "system": "bazi",
+      "section": "己土喜用提要",
+      "title": "己土调候失令",
+      "when": {
+        "all": [
+          {
+            "day_master": "己"
+          },
+          {
+            "not": {
+              "tiaohou_hit": {
+                "rank": 1
+              }
+            }
+          }
+        ]
+      },
+      "then": {
+        "topic": "格局",
+        "verdict": "凶",
+        "score": -1,
+        "text": "第一调候用神未现，寒暖燥湿有所偏，须待大运流年补之（非谓命局全无此五行）。"
+      },
+      "confidence": "A"
+    },
+    {
+      "id": "QT-013",
+      "book": "穷通宝鉴",
+      "system": "bazi",
+      "section": "庚金喜用提要",
+      "title": "庚金调候得用",
+      "when": {
+        "all": [
+          {
+            "day_master": "庚"
+          },
+          {
+            "tiaohou_hit": {
+              "rank": 1
+            }
+          }
+        ]
+      },
+      "then": {
+        "topic": "格局",
+        "verdict": "吉",
+        "score": 2,
+        "text": "第一调候用神现于命局，寒暖燥湿得宜，气数不偏，主根基调润、进退有度。"
+      },
+      "confidence": "A"
+    },
+    {
+      "id": "QT-014",
+      "book": "穷通宝鉴",
+      "system": "bazi",
+      "section": "庚金喜用提要",
+      "title": "庚金调候失令",
+      "when": {
+        "all": [
+          {
+            "day_master": "庚"
+          },
+          {
+            "not": {
+              "tiaohou_hit": {
+                "rank": 1
+              }
+            }
+          }
+        ]
+      },
+      "then": {
+        "topic": "格局",
+        "verdict": "凶",
+        "score": -1,
+        "text": "第一调候用神未现，寒暖燥湿有所偏，须待大运流年补之（非谓命局全无此五行）。"
+      },
+      "confidence": "A"
+    },
+    {
+      "id": "QT-015",
+      "book": "穷通宝鉴",
+      "system": "bazi",
+      "section": "辛金喜用提要",
+      "title": "辛金调候得用",
+      "when": {
+        "all": [
+          {
+            "day_master": "辛"
+          },
+          {
+            "tiaohou_hit": {
+              "rank": 1
+            }
+          }
+        ]
+      },
+      "then": {
+        "topic": "格局",
+        "verdict": "吉",
+        "score": 2,
+        "text": "第一调候用神现于命局，寒暖燥湿得宜，气数不偏，主根基调润、进退有度。"
+      },
+      "confidence": "A"
+    },
+    {
+      "id": "QT-016",
+      "book": "穷通宝鉴",
+      "system": "bazi",
+      "section": "辛金喜用提要",
+      "title": "辛金调候失令",
+      "when": {
+        "all": [
+          {
+            "day_master": "辛"
+          },
+          {
+            "not": {
+              "tiaohou_hit": {
+                "rank": 1
+              }
+            }
+          }
+        ]
+      },
+      "then": {
+        "topic": "格局",
+        "verdict": "凶",
+        "score": -1,
+        "text": "第一调候用神未现，寒暖燥湿有所偏，须待大运流年补之（非谓命局全无此五行）。"
+      },
+      "confidence": "A"
+    },
+    {
+      "id": "QT-017",
+      "book": "穷通宝鉴",
+      "system": "bazi",
+      "section": "壬水喜用提要",
+      "title": "壬水调候得用",
+      "when": {
+        "all": [
+          {
+            "day_master": "壬"
+          },
+          {
+            "tiaohou_hit": {
+              "rank": 1
+            }
+          }
+        ]
+      },
+      "then": {
+        "topic": "格局",
+        "verdict": "吉",
+        "score": 2,
+        "text": "第一调候用神现于命局，寒暖燥湿得宜，气数不偏，主根基调润、进退有度。"
+      },
+      "confidence": "A"
+    },
+    {
+      "id": "QT-018",
+      "book": "穷通宝鉴",
+      "system": "bazi",
+      "section": "壬水喜用提要",
+      "title": "壬水调候失令",
+      "when": {
+        "all": [
+          {
+            "day_master": "壬"
+          },
+          {
+            "not": {
+              "tiaohou_hit": {
+                "rank": 1
+              }
+            }
+          }
+        ]
+      },
+      "then": {
+        "topic": "格局",
+        "verdict": "凶",
+        "score": -1,
+        "text": "第一调候用神未现，寒暖燥湿有所偏，须待大运流年补之（非谓命局全无此五行）。"
+      },
+      "confidence": "A"
+    },
+    {
+      "id": "QT-019",
+      "book": "穷通宝鉴",
+      "system": "bazi",
+      "section": "癸水喜用提要",
+      "title": "癸水调候得用",
+      "when": {
+        "all": [
+          {
+            "day_master": "癸"
+          },
+          {
+            "tiaohou_hit": {
+              "rank": 1
+            }
+          }
+        ]
+      },
+      "then": {
+        "topic": "格局",
+        "verdict": "吉",
+        "score": 2,
+        "text": "第一调候用神现于命局，寒暖燥湿得宜，气数不偏，主根基调润、进退有度。"
+      },
+      "confidence": "A"
+    },
+    {
+      "id": "QT-020",
+      "book": "穷通宝鉴",
+      "system": "bazi",
+      "section": "癸水喜用提要",
+      "title": "癸水调候失令",
+      "when": {
+        "all": [
+          {
+            "day_master": "癸"
+          },
+          {
+            "not": {
+              "tiaohou_hit": {
+                "rank": 1
+              }
+            }
+          }
+        ]
+      },
+      "then": {
+        "topic": "格局",
+        "verdict": "凶",
+        "score": -1,
+        "text": "第一调候用神未现，寒暖燥湿有所偏，须待大运流年补之（非谓命局全无此五行）。"
+      },
+      "confidence": "A"
+    },
+    {
+      "id": "ZHY-01",
+      "book": "造化元钥",
+      "system": "bazi",
+      "section": "调候别解",
+      "title": "调候藏于地支",
+      "when": {
+        "all": [
+          {
+            "not": {
+              "tiaohou_hit": {
+                "rank": 1
+              }
+            }
+          },
+          {
+            "tiaohou_hit": {
+              "rank": 2
+            }
+          }
+        ]
+      },
+      "then": {
+        "topic": "格局",
+        "verdict": "吉",
+        "score": 1,
+        "text": "第一调候之神未现而次神得用，力虽缓而绵长，主得环境之助而非显助。"
+      },
+      "confidence": "C"
+    },
+    {
+      "id": "ZHY-02",
+      "book": "造化元钥",
+      "system": "bazi",
+      "section": "调候别解",
+      "title": "调候受冲",
+      "when": {
+        "all": [
+          {
+            "tiaohou_hit": {
+              "rank": 1
+            }
+          },
+          {
+            "relation": {
+              "type": "冲"
+            }
+          }
+        ]
+      },
+      "then": {
+        "topic": "格局",
+        "verdict": "凶",
+        "score": -1,
+        "text": "调候用神虽现而逢冲，主得而复失，须待合冲之年方能落实。"
+      },
+      "confidence": "C"
+    },
+    {
+      "id": "MY-01",
+      "book": "命理约言",
+      "system": "bazi",
+      "section": "论清浊",
+      "title": "格局清纯",
+      "when": {
+        "all": [
+          {
+            "strength": [
+              "中和",
+              "中和偏强",
+              "中和偏弱"
+            ]
+          },
+          {
+            "element_balanced": {
+              "op": "<",
+              "value": 20
+            }
+          }
+        ]
+      },
+      "then": {
+        "topic": "格局",
+        "verdict": "吉",
+        "score": 2,
+        "text": "八字清纯、不杂不乱，主心志专一、行事有条理，成就虽缓而稳。"
+      },
+      "confidence": "B"
+    },
+    {
+      "id": "MY-02",
+      "book": "命理约言",
+      "system": "bazi",
+      "section": "论用神",
+      "title": "用神有根",
+      "when": {
+        "all": [
+          {
+            "ten_god_present": "正官"
+          },
+          {
+            "strength": [
+              "身强",
+              "中和偏强"
+            ]
+          },
+          {
+            "not": {
+              "relation": {
+                "type": "刑"
+              }
+            }
+          }
+        ]
+      },
+      "then": {
+        "topic": "事业",
+        "verdict": "吉",
+        "score": 2,
+        "text": "用神有根而不受刑，主所谋可成、名位可守。"
+      },
+      "confidence": "B"
+    },
+    {
+      "id": "ZG-01",
+      "book": "子平管见",
+      "system": "bazi",
+      "section": "论伤官",
+      "title": "伤官生财",
+      "when": {
+        "all": [
+          {
+            "pattern": "伤官格"
+          },
+          {
+            "ten_god_present": "正财"
+          },
+          {
+            "not": {
+              "ten_god_present": "正官"
+            }
+          }
+        ]
+      },
+      "then": {
+        "topic": "财运",
+        "verdict": "吉",
+        "score": 3,
+        "text": "伤官生财而不见官，谓之流通。主以才艺、技术换得实利，宜自由业。"
+      },
+      "confidence": "A"
+    },
+    {
+      "id": "ZG-02",
+      "book": "子平管见",
+      "system": "bazi",
+      "section": "论偏印",
+      "title": "枭神夺食",
+      "when": {
+        "all": [
+          {
+            "ten_god_present": "偏印"
+          },
+          {
+            "ten_god_present": "食神"
+          },
+          {
+            "strength": [
+              "身强"
+            ]
+          }
+        ]
+      },
+      "then": {
+        "topic": "健康",
+        "verdict": "凶",
+        "score": -2,
+        "text": "偏印夺食，古谓「枭神夺食」。主思虑过多、饮食消化易失序，须防郁结。"
+      },
+      "confidence": "A"
+    },
+    {
+      "id": "MT-01",
+      "book": "命理探原",
+      "system": "bazi",
+      "section": "四柱总论",
+      "title": "四柱五行平均",
+      "when": {
+        "all": [
+          {
+            "element_balanced": {
+              "op": "<",
+              "value": 18
+            }
+          },
+          {
+            "strength": [
+              "中和"
+            ]
+          }
+        ]
+      },
+      "then": {
+        "topic": "综合",
+        "verdict": "吉",
+        "score": 2,
+        "text": "四柱五行平均、强弱得中，主性情平和、少大病大灾，属平顺之命。"
+      },
+      "confidence": "B"
+    },
+    {
+      "id": "MT-02",
+      "book": "命理探原",
+      "system": "bazi",
+      "section": "论日主",
+      "title": "日主得地得生",
+      "when": {
+        "all": [
+          {
+            "any": [
+              {
+                "shensha": "禄神"
+              },
+              {
+                "shensha": "羊刃"
+              }
+            ]
+          },
+          {
+            "any": [
+              {
+                "ten_god_present": "正印"
+              },
+              {
+                "ten_god_present": "偏印"
+              }
+            ]
+          }
+        ]
+      },
+      "then": {
+        "topic": "根基",
+        "verdict": "吉",
+        "score": 2,
+        "text": "日主得地而又有印生，根深叶茂，主能承压、恢复力强。"
+      },
+      "confidence": "B"
+    },
+    {
+      "id": "MT-03",
+      "book": "命理探原",
+      "system": "bazi",
+      "section": "论神煞",
+      "title": "凶煞汇聚",
+      "when": {
+        "all": [
+          {
+            "shensha": "劫煞"
+          },
+          {
+            "shensha": "亡神"
+          }
+        ]
+      },
+      "then": {
+        "topic": "综合",
+        "verdict": "凶",
+        "score": -2,
+        "text": "劫煞、亡神并见，古谓易有意外破耗与口舌官非，宜谨言慎行。"
+      },
+      "confidence": "B"
+    },
+    {
+      "id": "QL-01",
+      "book": "千里命稿",
+      "system": "bazi",
+      "section": "论财",
+      "title": "身强财弱",
+      "when": {
+        "all": [
+          {
+            "strength": [
+              "身强"
+            ]
+          },
+          {
+            "ten_god_group_count": {
+              "group": "财",
+              "op": "<",
+              "value": 1
+            }
+          }
+        ]
+      },
+      "then": {
+        "topic": "财运",
+        "verdict": "中性",
+        "score": -1,
+        "text": "身强而财星不现，主有力无处使，求财须待运助，宜先立本事。"
+      },
+      "confidence": "B"
+    },
+    {
+      "id": "QL-02",
+      "book": "千里命稿",
+      "system": "bazi",
+      "section": "论官",
+      "title": "官星透干有根",
+      "when": {
+        "all": [
+          {
+            "ten_god_in_stems": "正官"
+          },
+          {
+            "strength": [
+              "身强",
+              "中和偏强"
+            ]
+          }
+        ]
+      },
+      "then": {
+        "topic": "事业",
+        "verdict": "吉",
+        "score": 3,
+        "text": "官星透干而身能任，主有名有位，宜正途进取。"
+      },
+      "confidence": "A"
+    },
+    {
+      "id": "QL-03",
+      "book": "千里命稿",
+      "system": "bazi",
+      "section": "论食伤",
+      "title": "食伤生财",
+      "when": {
+        "all": [
+          {
+            "ten_god_present": "食神"
+          },
+          {
+            "ten_god_present": "正财"
+          },
+          {
+            "not": {
+              "strength": [
+                "身弱"
+              ]
+            }
+          }
+        ]
+      },
+      "then": {
+        "topic": "财运",
+        "verdict": "吉",
+        "score": 2,
+        "text": "食神生财，主以稳健之技持续得利，宜实体、手艺、服务之业。"
+      },
+      "confidence": "A"
+    },
+    {
+      "id": "DC-01",
+      "book": "滴天髓阐微",
+      "system": "bazi",
+      "section": "从格",
+      "title": "日主极弱可从",
+      "when": {
+        "all": [
+          {
+            "strength": [
+              "身弱"
+            ]
+          },
+          {
+            "element_extreme": {
+              "op": ">",
+              "value": 55
+            }
+          }
+        ]
+      },
+      "then": {
+        "topic": "格局",
+        "verdict": "中性",
+        "score": 0,
+        "text": "日主极弱而一行独盛，或成从格。成从则顺其旺神，反主显达；不成则终身受制，须细辨。"
+      },
+      "confidence": "C"
+    },
+    {
+      "id": "DC-02",
+      "book": "滴天髓阐微",
+      "system": "bazi",
+      "section": "专旺",
+      "title": "日主极旺成方",
+      "when": {
+        "all": [
+          {
+            "strength": [
+              "身强"
+            ]
+          },
+          {
+            "relation": {
+              "type": "三会"
+            }
+          }
+        ]
+      },
+      "then": {
+        "topic": "格局",
+        "verdict": "吉",
+        "score": 2,
+        "text": "日主极旺而成三会方局，或为专旺。顺其气势则贵，逆之则灾，宜泄不宜克。"
+      },
+      "confidence": "C"
+    }
+  ]
+}

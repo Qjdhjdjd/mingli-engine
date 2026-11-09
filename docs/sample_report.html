@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>命理规则引擎 · 示例报告</title>
+<style>
+:root{--bg:#fbf9f5;--card:#fff;--ink:#1f2328;--ink2:#5b6470;--line:#e2ddd4;--accent:#8c2f24;--gold:#a8762a}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;font-size:15px;line-height:1.65}
+.wrap{max-width:960px;margin:0 auto;padding:36px 24px 70px}
+header{border-bottom:1px solid var(--line);padding-bottom:16px;margin-bottom:24px}
+h1{font-family:Georgia,"Songti SC",serif;font-size:25px;margin:0;letter-spacing:.5px}
+h1 small{display:block;font-size:12px;color:var(--ink2);letter-spacing:2px;font-weight:400;margin-top:6px;font-family:inherit}
+.sec{font-size:13px;letter-spacing:2px;color:var(--gold);margin:28px 0 12px;padding-bottom:6px;border-bottom:1px solid var(--line);font-weight:600}
+.pillars{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.pcard{border:1px solid var(--line);border-radius:10px;padding:14px 12px;text-align:center;background:#fdfcf9}
+.pcard .lab{font-size:11px;color:var(--ink2);letter-spacing:2px}
+.pcard .gz{font-family:Georgia,"Songti SC",serif;font-size:32px;letter-spacing:3px;margin:6px 0 4px}
+.pcard .gz .z{color:var(--accent)}
+.pcard .ss{font-size:12px;color:var(--gold)}
+.pcard .sub{font-size:11px;color:var(--ink2);margin-top:6px;line-height:1.7}
+.kv{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:9px 22px;font-size:13.5px}
+.kv div{display:flex;gap:8px}
+.kv div.wide{grid-column:1/-1}
+.kv span:first-child{color:var(--ink2);min-width:66px;flex:none}
+.bars{display:flex;flex-direction:column;gap:7px}
+.bar{display:grid;grid-template-columns:26px 1fr 64px;align-items:center;gap:10px;font-size:12px}
+.bar .track{height:9px;background:#eee9e0;border-radius:5px;overflow:hidden}
+.bar .fill{height:100%;border-radius:5px}
+.bar .val{text-align:right;color:var(--ink2);font-variant-numeric:tabular-nums}
+.overall{display:flex;align-items:center;gap:18px;flex-wrap:wrap;border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:8px;padding:14px 18px;background:#fdfcf9}
+.overall .lv{font-family:Georgia,serif;font-size:25px;letter-spacing:2px}
+.topics{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.topic{border:1px solid var(--line);border-radius:999px;padding:5px 13px;font-size:12.5px;background:#fdfcf9}
+.topic b{font-weight:600;margin-left:5px}
+.rules{display:flex;flex-direction:column;gap:9px}
+.rule{border:1px solid var(--line);border-radius:8px;padding:11px 14px;background:#fff;display:grid;grid-template-columns:64px 1fr;gap:12px}
+.rule .tag{font-size:12px;font-weight:600;text-align:center;border-radius:5px;height:22px;line-height:22px;color:#fff;white-space:nowrap}
+.rule .src{font-size:12px;color:var(--gold)}
+.rule .txt{font-size:13.5px;margin-top:2px}
+.rule .meta{font-size:11px;color:var(--ink2);margin-top:4px}
+footer{margin-top:32px;padding-top:16px;border-top:1px solid var(--line);font-size:12px;color:var(--ink2);line-height:1.8}
+@media(max-width:640px){.pillars{grid-template-columns:repeat(2,1fr)}}
+</style></head><body><div class="wrap">
+<header><h1>命理规则引擎 · 示例报告<small>典籍吉凶规则的程序化整理</small></h1></header>
+
+<div class="sec">四柱排盘</div>
+<div class="pillars">
+        <div class="pcard">
+          <div class="lab">年柱</div>
+          <div class="gz"><span>庚</span><span class="z">午</span></div>
+          <div class="ss">比肩</div>
+          <div class="sub">藏干 丁 己<br>纳音 路旁土<br>长生 沐浴</div>
+        </div>
+        <div class="pcard">
+          <div class="lab">月柱</div>
+          <div class="gz"><span>辛</span><span class="z">巳</span></div>
+          <div class="ss">劫财</div>
+          <div class="sub">藏干 丙 庚 戊<br>纳音 白蜡金<br>长生 长生</div>
+        </div>
+        <div class="pcard">
+          <div class="lab">日柱</div>
+          <div class="gz"><span>庚</span><span class="z">辰</span></div>
+          <div class="ss">日主</div>
+          <div class="sub">藏干 戊 乙 癸<br>纳音 白蜡金<br>长生 养</div>
+        </div>
+        <div class="pcard">
+          <div class="lab">时柱</div>
+          <div class="gz"><span>辛</span><span class="z">巳</span></div>
+          <div class="ss">劫财</div>
+          <div class="sub">藏干 丙 庚 戊<br>纳音 白蜡金<br>长生 长生</div>
+        </div></div>
+
+<div class="sec">命局</div>
+<div class="kv">
+  <div><span>出生</span><span>1990-05-15 10:30（男）</span></div>
+  <div><span>月令</span><span>立夏 · 交节 05-06 02:32</span></div>
+  <div><span>日主</span><span>庚（金）</span></div>
+  <div><span>强弱</span><span>偏强，同类占比 0.703</span></div>
+  <div><span>格局</span><span>七杀格</span></div>
+  <div><span>空亡</span><span>申 酉</span></div>
+  <div class="wide"><span>调候</span><span>壬 / 戊 / 丙　命中 戊(第2用神)、丙(第3用神)</span></div>
+  <div><span>刑冲合害</span><span>无</span></div>
+  <div class="wide"><span>神煞</span><span>将星、亡神、华盖、劫煞、天德贵人、月德贵人、魁罡、十恶大败、寡宿</span></div>
+  <div class="wide"><span>大运</span><span>壬午(7) 癸未(17) 甲申(27) 乙酉(37) 丙戌(47) 丁亥(57) 戊子(67) 己丑(77)</span></div>
+</div>
+
+<div class="sec">五行力量（藏干加权估算）</div>
+<div class="bars"><div class="bar"><span>木</span>
+          <div class="track"><div class="fill" style="width:4.05%;background:#4f7d4a"></div></div>
+          <span class="val">4.0%</span></div><div class="bar"><span>火</span>
+          <div class="track"><div class="fill" style="width:24.32%;background:#b4472f"></div></div>
+          <span class="val">24.3%</span></div><div class="bar"><span>土</span>
+          <div class="track"><div class="fill" style="width:14.86%;background:#a8762a"></div></div>
+          <span class="val">14.9%</span></div><div class="bar"><span>金</span>
+          <div class="track"><div class="fill" style="width:55.41%;background:#8a8f98"></div></div>
+          <span class="val">55.4%</span></div><div class="bar"><span>水</span>
+          <div class="track"><div class="fill" style="width:1.35%;background:#3b6b8f"></div></div>
+          <span class="val">1.4%</span></div></div>
+
+<div class="sec">规则判定</div>
+<div class="overall">
+  <div class="lv" style="color:#6b7280">平</div>
+  <div style="font-size:12.5px;color:var(--ink2);line-height:1.7">
+    命中 15 条规则　均分 +0.40　可参考度 较高<br>
+    综合倾向为命中规则得分的算术平均，仅表示典籍规则的分布，不代表事件概率。命中条数越少，可参考性越低。
+  </div>
+</div>
+<div class="topics"><div class="topic">事业<b style="color:#2d6a4f">大吉 +5</b></div><div class="topic">气势<b style="color:#2d6a4f">吉 +3</b></div><div class="topic">根基<b style="color:#2d6a4f">吉 +2</b></div><div class="topic">综合<b style="color:#a4243b">凶 -2</b></div><div class="topic">晚运<b style="color:#2d6a4f">吉 +2</b></div><div class="topic">财运<b style="color:#a4243b">凶 -2</b></div><div class="topic">格局<b style="color:#a4243b">凶 -2</b></div><div class="topic">性格<b style="color:#6b7280">平 +0</b></div></div>
+
+<div class="sec">命中条目 · 典籍溯源</div>
+<div class="rules">
+        <div class="rule">
+          <div class="tag" style="background:#2d6a4f">吉+2</div>
+          <div>
+            <div class="src">李虚中命书 · 论纳音</div>
+            <div class="txt">古法以年为本、以日为身，年纳音生日纳音，主祖上荫庇、根基得其滋养。</div>
+            <div class="meta">年纳音生日纳音　置信度 B　唐代古法重纳音，宋以后子平渐轻此说。</div>
+          </div>
+        </div>
+        <div class="rule">
+          <div class="tag" style="background:#2d6a4f">吉+2</div>
+          <div>
+            <div class="src">珞琭子三命消息赋 · 消息赋</div>
+            <div class="txt">日主秉月令之气而旺，谓之得时，主行事有底气、能任事。</div>
+            <div class="meta">日主得月令之气　置信度 B</div>
+          </div>
+        </div>
+        <div class="rule">
+          <div class="tag" style="background:#a4243b">凶-2</div>
+          <div>
+            <div class="src">珞琭子三命消息赋 · 消息赋</div>
+            <div class="txt">一行独旺逾四成五，谓之偏枯。古法主张「消息」——损有余、补不足，否则易见偏执之患。</div>
+            <div class="meta">一行独旺，气失消息　置信度 B</div>
+          </div>
+        </div>
+        <div class="rule">
+          <div class="tag" style="background:#6b7280">平+1</div>
+          <div>
+            <div class="src">五行精纪 · 纳音篇</div>
+            <div class="txt">月、时纳音同气，主中年至晚年路数一贯，少转折而多守成。</div>
+            <div class="meta">纳音同气　置信度 B</div>
+          </div>
+        </div>
+        <div class="rule">
+          <div class="tag" style="background:#6b7280">平+0</div>
+          <div>
+            <div class="src">五行精纪 · 神煞篇</div>
+            <div class="txt">神煞叠加过多（九项以上），古法已明言当以格局喜忌为主，不可逐条认领，否则自相矛盾。</div>
+            <div class="meta">神煞混杂　置信度 A　此条为判读原则而非具体吉凶，score 置 0。</div>
+          </div>
+        </div>
+        <div class="rule">
+          <div class="tag" style="background:#2d6a4f">吉+2</div>
+          <div>
+            <div class="src">三命通会 · 论时</div>
+            <div class="txt">身强而时柱见财官，主晚运得力，子女有成或晚年名位不衰。</div>
+            <div class="meta">时柱见财官　置信度 B</div>
+          </div>
+        </div>
+        <div class="rule">
+          <div class="tag" style="background:#6b7280">平+0</div>
+          <div>
+            <div class="src">三命通会 · 论魁罡</div>
+            <div class="txt">魁罡主人性刚果断、聪明好权，然多起伏。女命古法谓过刚，今不作定论。</div>
+            <div class="meta">魁罡日　置信度 A</div>
+          </div>
+        </div>
+        <div class="rule">
+          <div class="tag" style="background:#a4243b">凶-2</div>
+          <div>
+            <div class="src">三命通会 · 论败日</div>
+            <div class="txt">日柱犯十恶大败，古谓财禄易散、成而复败。须以格局与用神救之，不可独断。</div>
+            <div class="meta">十恶大败　置信度 B</div>
+          </div>
+        </div>
+        <div class="rule">
+          <div class="tag" style="background:#a4243b">凶-2</div>
+          <div>
+            <div class="src">神峰通考 · 病药说</div>
+            <div class="txt">日主过旺而无泄无制，是为「病」。古法主张寻「药」——以财官食伤损其有余。</div>
+            <div class="meta">日主过旺为病　置信度 A</div>
+          </div>
+        </div>
+        <div class="rule">
+          <div class="tag" style="background:#2d6a4f">吉+3</div>
+          <div>
+            <div class="src">子平真诠 · 论七杀</div>
+            <div class="txt">七杀格得食神制或印化，谓之成格。主能担重任，于竞争中立威。</div>
+            <div class="meta">七杀格有制　置信度 A</div>
+          </div>
+        </div>
+        <div class="rule">
+          <div class="tag" style="background:#2d6a4f">吉+2</div>
+          <div>
+            <div class="src">滴天髓 · 衰旺</div>
+            <div class="txt">身旺而食伤得用，气有出路。主才华可展，宜技艺、创作、表达之途。</div>
+            <div class="meta">身强喜泄　置信度 A</div>
+          </div>
+        </div>
+        <div class="rule">
+          <div class="tag" style="background:#a4243b">凶-1</div>
+          <div>
+            <div class="src">穷通宝鉴 · 庚金喜用提要</div>
+            <div class="txt">第一调候用神未现，寒暖燥湿有所偏，须待大运流年补之（非谓命局全无此五行）。</div>
+            <div class="meta">庚金调候失令　置信度 A</div>
+          </div>
+        </div>
+        <div class="rule">
+          <div class="tag" style="background:#2d6a4f">吉+1</div>
+          <div>
+            <div class="src">造化元钥 · 调候别解</div>
+            <div class="txt">第一调候之神未现而次神得用，力虽缓而绵长，主得环境之助而非显助。</div>
+            <div class="meta">调候藏于地支　置信度 C</div>
+          </div>
+        </div>
+        <div class="rule">
+          <div class="tag" style="background:#2d6a4f">吉+2</div>
+          <div>
+            <div class="src">命理约言 · 论用神</div>
+            <div class="txt">用神有根而不受刑，主所谋可成、名位可守。</div>
+            <div class="meta">用神有根　置信度 B</div>
+          </div>
+        </div>
+        <div class="rule">
+          <div class="tag" style="background:#a4243b">凶-2</div>
+          <div>
+            <div class="src">命理探原 · 论神煞</div>
+            <div class="txt">劫煞、亡神并见，古谓易有意外破耗与口舌官非，宜谨言慎行。</div>
+            <div class="meta">凶煞汇聚　置信度 B</div>
+          </div>
+        </div></div>
+
+<footer><b>性质说明：</b>本工具是对中国传统命理文献中「条件→结论」规则的程序化整理，属文化研究与娱乐用途。命理典籍的吉凶判断建立在古代阴阳五行宇宙观之上，不具科学预测效力，不应作为医疗、婚姻、投资、职业等现实决策的依据。<br>
+本报告由 mingli-engine 自动生成，规则库覆盖 29 部典籍、119 条规则。每条结论均可回指所出书名与篇目。</footer>
+</div></body></html>

@@ -1,0 +1,297 @@
+{
+  "meta": {
+    "version": "1.0",
+    "scope": "紫微斗数 / 六爻纳甲 / 梅花易数 / 择吉 / 姓名学 / 周易",
+    "book_count": 10,
+    "note": "各体系规则由同一规则引擎执行，分析器只负责构造上下文。"
+  },
+  "rules": [
+    {
+      "id": "ZW-01", "book": "紫微斗数全书", "system": "ziwei", "section": "安星诀",
+      "title": "命宫主星庙旺",
+      "when": {"all": [{"zw_has_main": true}, {"zw_bright": ["庙", "旺"]}]},
+      "then": {"topic": "命格", "verdict": "吉", "score": 2, "text": "命宫主星庙旺，星性得以正面发挥，主气度开展、才能易显。"},
+      "confidence": "A"
+    },
+    {
+      "id": "ZW-02", "book": "紫微斗数全书", "system": "ziwei", "section": "安星诀",
+      "title": "命宫主星落陷",
+      "when": {"all": [{"zw_has_main": true}, {"zw_bright": ["陷", "不得地"]}]},
+      "then": {"topic": "命格", "verdict": "凶", "score": -2, "text": "命宫主星落陷，星力受抑，主才华施展较费力，须借三方四正补之。"},
+      "confidence": "A"
+    },
+    {
+      "id": "ZW-03", "book": "紫微斗数全书", "system": "ziwei", "section": "论辅星",
+      "title": "六吉会命",
+      "when": {"zw_ji_count": {"op": ">=", "value": 2}},
+      "then": {"topic": "贵人", "verdict": "吉", "score": 2, "text": "文昌、文曲、左辅、右弼、天魁、天钺之中二颗以上会照命宫，主得助力、有文名。"},
+      "confidence": "A"
+    },
+    {
+      "id": "ZW-04", "book": "紫微斗数全书", "system": "ziwei", "section": "论煞星",
+      "title": "六煞会命",
+      "when": {"zw_sha_count": {"op": ">=", "value": 2}},
+      "then": {"topic": "命格", "verdict": "凶", "score": -2, "text": "擎羊、陀罗、火星、铃星、地空、地劫之中二颗以上会照，主阻力与破耗较多。"},
+      "confidence": "A"
+    },
+    {
+      "id": "ZW-05", "book": "紫微斗数全书", "system": "ziwei", "section": "论四化",
+      "title": "化忌入命",
+      "when": {"zw_sihua_in_ming": "忌"},
+      "then": {"topic": "命格", "verdict": "凶", "score": -3, "text": "生年化忌入命宫，主执着难放、易有挂碍，所忌之事须格外留意。"},
+      "confidence": "A"
+    },
+    {
+      "id": "ZW-06", "book": "紫微斗数全书", "system": "ziwei", "section": "论空宫",
+      "title": "命宫无主星",
+      "when": {"zw_has_main": false},
+      "then": {"topic": "命格", "verdict": "中性", "score": 0, "text": "命宫无主星（空宫），须借对宫主星安看。主可塑性强，但也易受环境左右。"},
+      "confidence": "A"
+    },
+    {
+      "id": "ZW-07", "book": "紫微斗数全书", "system": "ziwei", "section": "星系格局",
+      "title": "杀破狼格局",
+      "when": {"zw_sanfang_has": ["七杀", "破军", "贪狼"]},
+      "then": {"topic": "命格", "verdict": "中性", "score": 0, "text": "三方四正见杀破狼，主变动、开创、不受拘束，宜主动求变之业。"},
+      "confidence": "A"
+    },
+    {
+      "id": "ZW-08", "book": "紫微斗数全书", "system": "ziwei", "section": "星系格局",
+      "title": "机月同梁格局",
+      "when": {"zw_sanfang_has": ["天机", "太阴", "天同", "天梁"]},
+      "then": {"topic": "命格", "verdict": "吉", "score": 1, "text": "三方见机月同梁，主稳定、宜文职与幕僚之途，守成有余。"},
+      "confidence": "A"
+    },
+    {
+      "id": "JZ-01", "book": "京氏易传", "system": "liuyao", "section": "八宫世应",
+      "title": "世爻旺相",
+      "when": {"ly_shi_state": "旺"},
+      "then": {"topic": "自身", "verdict": "吉", "score": 2, "text": "世爻临月建日辰而旺，主自身底气足、能担当所问之事。"},
+      "confidence": "A"
+    },
+    {
+      "id": "JZ-02", "book": "京氏易传", "system": "liuyao", "section": "六亲生克",
+      "title": "用神受克",
+      "when": {"ly_yongshen_state": "受克"},
+      "then": {"topic": "所问", "verdict": "凶", "score": -3, "text": "用神受动爻或日月克制，主所问之事受阻，成事费力。"},
+      "confidence": "A"
+    },
+    {
+      "id": "JZ-03", "book": "京氏易传", "system": "liuyao", "section": "游魂归魂",
+      "title": "归魂卦",
+      "when": {"ly_hex_type": "归魂"},
+      "then": {"topic": "所问", "verdict": "中性", "score": 0, "text": "得归魂卦，主事有归着、宜守旧，不宜远图。"},
+      "confidence": "B"
+    },
+    {
+      "id": "HZ-01", "book": "火珠林", "system": "liuyao", "section": "卦体",
+      "title": "六冲卦",
+      "when": {"ly_hex_type": "六冲"},
+      "then": {"topic": "所问", "verdict": "凶", "score": -2, "text": "六冲卦主冲散、快变、不持久。占合作易散，占病主急。"},
+      "confidence": "A"
+    },
+    {
+      "id": "HZ-02", "book": "火珠林", "system": "liuyao", "section": "卦体",
+      "title": "六合卦",
+      "when": {"ly_hex_type": "六合"},
+      "then": {"topic": "所问", "verdict": "吉", "score": 2, "text": "六合卦主稳固、缠绵、难分难解。占婚恋与合作多主成。"},
+      "confidence": "A"
+    },
+    {
+      "id": "HJ-01", "book": "黄金策", "system": "liuyao", "section": "动变",
+      "title": "用神化进神",
+      "when": {"ly_yongshen_huajin": "进"},
+      "then": {"topic": "所问", "verdict": "吉", "score": 2, "text": "用神动而化进神，趋势增强，事虽缓而必成。"},
+      "confidence": "A"
+    },
+    {
+      "id": "HJ-02", "book": "黄金策", "system": "liuyao", "section": "动变",
+      "title": "用神化退神",
+      "when": {"ly_yongshen_huajin": "退"},
+      "then": {"topic": "所问", "verdict": "凶", "score": -2, "text": "用神动而化退神，力量衰减，主先热后冷、事难持久。"},
+      "confidence": "A"
+    },
+    {
+      "id": "HJ-03", "book": "黄金策", "system": "liuyao", "section": "动变",
+      "title": "忌神发动",
+      "when": {"ly_jishen_dong": true},
+      "then": {"topic": "所问", "verdict": "凶", "score": -3, "text": "忌神发动克用，主阻力当令，须待忌神受制之期方有转机。"},
+      "confidence": "A"
+    },
+    {
+      "id": "ZB-01", "book": "增删卜易", "system": "liuyao", "section": "用神旺衰",
+      "title": "用神得生",
+      "when": {"ly_yongshen_state": "旺"},
+      "then": {"topic": "所问", "verdict": "吉", "score": 3, "text": "用神得日月生扶或动爻相生，有根有助，所问可成。"},
+      "confidence": "A"
+    },
+    {
+      "id": "ZB-02", "book": "增删卜易", "system": "liuyao", "section": "用神旺衰",
+      "title": "用神月破",
+      "when": {"ly_yongshen_state": "月破"},
+      "then": {"topic": "所问", "verdict": "凶", "score": -3, "text": "用神被月建冲破，主事散、根基不稳，纵有他助亦难成。"},
+      "confidence": "A"
+    },
+    {
+      "id": "ZB-03", "book": "增删卜易", "system": "liuyao", "section": "用克世",
+      "title": "用克世反吉",
+      "when": {"all": [{"ly_yongshen_ke_shi": true}, {"ly_question": "求财"}]},
+      "then": {"topic": "所问", "verdict": "吉", "score": 2, "text": "野鹤老人独得之见：占求财而财爻克世，反主财来找我，勿作凶看。"},
+      "confidence": "A", "note": "此说与《卜筮正宗》立场相左，属《增删卜易》特色。"
+    },
+    {
+      "id": "BS-01", "book": "卜筮正宗", "system": "liuyao", "section": "用神分类定例",
+      "title": "用神不上卦",
+      "when": {"ly_yongshen_hidden": true},
+      "then": {"topic": "所问", "verdict": "凶", "score": -1, "text": "用神不上卦，须取本宫首卦伏神。主事无正面着落，须从侧面寻机。"},
+      "confidence": "A"
+    },
+    {
+      "id": "BS-02", "book": "卜筮正宗", "system": "liuyao", "section": "世应",
+      "title": "世应相生",
+      "when": {"ly_shi_ying": "相生"},
+      "then": {"topic": "所问", "verdict": "吉", "score": 2, "text": "世应相生，主双方意愿相合、沟通顺畅，事易推进。"},
+      "confidence": "A"
+    },
+    {
+      "id": "BS-03", "book": "卜筮正宗", "system": "liuyao", "section": "世应",
+      "title": "世应相克",
+      "when": {"ly_shi_ying": "相克"},
+      "then": {"topic": "所问", "verdict": "凶", "score": -2, "text": "世应相克，主双方立场相左、彼此消耗，成事须先解其冲。"},
+      "confidence": "A"
+    },
+    {
+      "id": "MH-01", "book": "梅花易数", "system": "meihua", "section": "体用生克",
+      "title": "用生体",
+      "when": {"mh_tiyong": "用生体"},
+      "then": {"topic": "所问", "verdict": "大吉", "score": 4, "text": "用卦生体卦，所问之事来生我。主得财、得助、有意外之喜。"},
+      "confidence": "A"
+    },
+    {
+      "id": "MH-02", "book": "梅花易数", "system": "meihua", "section": "体用生克",
+      "title": "用克体",
+      "when": {"mh_tiyong": "用克体"},
+      "then": {"topic": "所问", "verdict": "大凶", "score": -4, "text": "用卦克体卦，所问之事来克我。主受制、耗损、易生疾病口舌。"},
+      "confidence": "A"
+    },
+    {
+      "id": "MH-03", "book": "梅花易数", "system": "meihua", "section": "体用生克",
+      "title": "体生用",
+      "when": {"mh_tiyong": "体生用"},
+      "then": {"topic": "所问", "verdict": "凶", "score": -2, "text": "体卦生用卦，我去生事。主付出多、回报少，劳而难成。"},
+      "confidence": "A"
+    },
+    {
+      "id": "MH-04", "book": "梅花易数", "system": "meihua", "section": "体用生克",
+      "title": "体克用",
+      "when": {"mh_tiyong": "体克用"},
+      "then": {"topic": "所问", "verdict": "吉", "score": 2, "text": "体卦克用卦，我能制事。主可成但须费力，属小吉。"},
+      "confidence": "A"
+    },
+    {
+      "id": "MH-05", "book": "梅花易数", "system": "meihua", "section": "体用生克",
+      "title": "体用比和",
+      "when": {"mh_tiyong": "比和"},
+      "then": {"topic": "所问", "verdict": "吉", "score": 1, "text": "体用比和，同气相求。主平顺无阻，但助力亦不显著，成败多在自己。"},
+      "confidence": "A"
+    },
+    {
+      "id": "MH-06", "book": "梅花易数", "system": "meihua", "section": "互变",
+      "title": "互卦生体",
+      "when": {"mh_hu_sheng_ti": true},
+      "then": {"topic": "过程", "verdict": "吉", "score": 2, "text": "互卦生体，事情推进途中得助，过程有转机。"},
+      "confidence": "A"
+    },
+    {
+      "id": "MH-07", "book": "梅花易数", "system": "meihua", "section": "互变",
+      "title": "变卦生体",
+      "when": {"mh_bian_sheng_ti": true},
+      "then": {"topic": "结果", "verdict": "吉", "score": 2, "text": "变卦生体，最终结果归于我有，收尾得利。"},
+      "confidence": "A"
+    },
+    {
+      "id": "XJ-01", "book": "协纪辨方书", "system": "zeri", "section": "建除十二神",
+      "title": "建除吉日",
+      "when": {"zeri_jianchu_jixiong": "吉"},
+      "then": {"topic": "择日", "verdict": "吉", "score": 2, "text": "值日为除、危、定、执、成、开之一，属可用之日。"},
+      "confidence": "A"
+    },
+    {
+      "id": "XJ-02", "book": "协纪辨方书", "system": "zeri", "section": "建除十二神",
+      "title": "建除凶日",
+      "when": {"zeri_jianchu_jixiong": "凶"},
+      "then": {"topic": "择日", "verdict": "凶", "score": -2, "text": "值日为建、满、平、收、破、闭之一，古诀谓「建满平收黑，破闭不相当」。"},
+      "confidence": "A"
+    },
+    {
+      "id": "XJ-03", "book": "协纪辨方书", "system": "zeri", "section": "黄道黑道",
+      "title": "黄道日",
+      "when": {"zeri_huangdao": true},
+      "then": {"topic": "择日", "verdict": "吉", "score": 2, "text": "值神为青龙、明堂、金匮、天德、玉堂、司命之一，属黄道日。"},
+      "confidence": "A"
+    },
+    {
+      "id": "XJ-04", "book": "协纪辨方书", "system": "zeri", "section": "黄道黑道",
+      "title": "黑道日",
+      "when": {"zeri_huangdao": false},
+      "then": {"topic": "择日", "verdict": "凶", "score": -2, "text": "值神为天刑、朱雀、白虎、天牢、玄武、勾陈之一，属黑道日，大事宜缓。"},
+      "confidence": "A"
+    },
+    {
+      "id": "XJ-05", "book": "协纪辨方书", "system": "zeri", "section": "吉凶权衡",
+      "title": "吉足胜凶",
+      "when": {"all": [{"zeri_huangdao": true}, {"zeri_jianchu_jixiong": "凶"}]},
+      "then": {"topic": "择日", "verdict": "平", "score": 0, "text": "黄道与凶值日并见，按《协纪辨方书》权衡：吉足则从宜，吉不足则从忌，须就具体事项再定。"},
+      "confidence": "A"
+    },
+    {
+      "id": "ZY-01", "book": "周易", "system": "zhouyi", "section": "系辞",
+      "title": "六爻安静",
+      "when": {"zy_dong_count": {"op": "=", "value": 0}},
+      "then": {"topic": "卦象", "verdict": "吉", "score": 1, "text": "六爻安静，事态稳定，宜守成不宜妄动。"},
+      "confidence": "B"
+    },
+    {
+      "id": "ZY-02", "book": "周易", "system": "zhouyi", "section": "系辞",
+      "title": "动爻过多",
+      "when": {"zy_dong_count": {"op": ">=", "value": 4}},
+      "then": {"topic": "卦象", "verdict": "凶", "score": -2, "text": "动爻四爻以上，事态纷纭、变数极多，难以一途而断。"},
+      "confidence": "B"
+    },
+    {
+      "id": "WG-01", "book": "五格剖象法", "system": "xingming", "section": "五格",
+      "title": "人格吉数",
+      "when": {"xm_shuli": {"ge": "人格", "jixiong": ["吉", "大吉"]}},
+      "then": {"topic": "主运", "verdict": "吉", "score": 2, "text": "人格数理属吉，主运通顺，性格与行事较为协调。"},
+      "confidence": "B", "note": "此法为日本熊崎健翁 1918 年整理，非中国传统命理主流。"
+    },
+    {
+      "id": "WG-02", "book": "五格剖象法", "system": "xingming", "section": "五格",
+      "title": "总格凶数",
+      "when": {"xm_shuli": {"ge": "总格", "jixiong": ["凶", "大凶"]}},
+      "then": {"topic": "后运", "verdict": "凶", "score": -2, "text": "总格数理属凶，古法谓中晚年宜守，不宜大兴土木或贸然扩张。"},
+      "confidence": "B"
+    },
+    {
+      "id": "WG-03", "book": "五格剖象法", "system": "xingming", "section": "三才",
+      "title": "三才相生",
+      "when": {"xm_sancai": "相生"},
+      "then": {"topic": "基础", "verdict": "吉", "score": 2, "text": "天、人、地三格五行相生，主基础稳固、环境助力较顺。"},
+      "confidence": "B"
+    },
+    {
+      "id": "WG-04", "book": "五格剖象法", "system": "xingming", "section": "三才",
+      "title": "三才相克",
+      "when": {"xm_sancai": "相克"},
+      "then": {"topic": "基础", "verdict": "凶", "score": -2, "text": "三格五行相克，主环境与自身易生摩擦，须以他法补之。"},
+      "confidence": "B"
+    },
+    {
+      "id": "WG-05", "book": "五格剖象法", "system": "xingming", "section": "五格",
+      "title": "地格吉数",
+      "when": {"xm_shuli": {"ge": "地格", "jixiong": ["吉", "大吉"]}},
+      "then": {"topic": "前运", "verdict": "吉", "score": 1, "text": "地格数理属吉，主早年根基与家庭缘较为顺遂。"},
+      "confidence": "B"
+    }
+  ]
+}

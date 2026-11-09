@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>命理规则引擎 · 典籍规则数字化</title>
+<style>
+  :root{
+    --bg:#fbf9f5; --card:#ffffff; --ink:#1f2328; --ink2:#5b6470;
+    --line:#e2ddd4; --accent:#8c2f24; --gold:#a8762a;
+    --good:#2d6a4f; --bad:#a4243b; --mid:#6b7280;
+    --shadow:0 1px 2px rgba(31,35,40,.06),0 8px 24px rgba(31,35,40,.05);
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+    font-size:15px;line-height:1.65;
+  }
+  .wrap{max-width:1080px;margin:0 auto;padding:32px 24px 80px}
+  header{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap;
+    border-bottom:1px solid var(--line);padding-bottom:18px;margin-bottom:22px}
+  h1{font-family:Georgia,"Songti SC","SimSun",serif;font-size:26px;margin:0;letter-spacing:.5px}
+  h1 small{display:block;font-family:inherit;font-size:12px;color:var(--ink2);letter-spacing:2px;font-weight:400;margin-top:6px}
+  .stats{font-size:12px;color:var(--ink2);text-align:right;line-height:1.8}
+  .stats b{color:var(--accent);font-size:16px;font-family:Georgia,serif}
+  nav{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:20px}
+  nav button{
+    background:transparent;border:1px solid transparent;border-radius:8px 8px 0 0;
+    padding:9px 16px;font-size:14px;color:var(--ink2);cursor:pointer;font-family:inherit;
+  }
+  nav button:hover{background:#f2eee6}
+  nav button.on{background:var(--card);border:1px solid var(--line);border-bottom-color:var(--card);
+    color:var(--accent);font-weight:600;box-shadow:0 -2px 0 var(--accent) inset}
+  .panel{display:none;background:var(--card);border:1px solid var(--line);border-radius:0 10px 10px 10px;
+    padding:22px;box-shadow:var(--shadow)}
+  .panel.on{display:block}
+  .form{display:flex;gap:14px;flex-wrap:wrap;align-items:flex-end}
+  .field{display:flex;flex-direction:column;gap:5px}
+  .field label{font-size:12px;color:var(--ink2);letter-spacing:.5px}
+  input,select{
+    font-family:inherit;font-size:14px;padding:8px 10px;border:1px solid var(--line);
+    border-radius:7px;background:#fff;color:var(--ink);min-width:120px;
+  }
+  input:focus,select:focus{outline:2px solid rgba(140,47,36,.25);border-color:var(--accent)}
+  .btn{
+    background:var(--accent);color:#fff;border:none;border-radius:7px;padding:9px 22px;
+    font-size:14px;cursor:pointer;font-family:inherit;letter-spacing:1px;
+  }
+  .btn:hover{background:#76261d}
+  .btn.ghost{background:#fff;color:var(--accent);border:1px solid var(--accent)}
+  .hint{font-size:12px;color:var(--ink2);margin-top:10px}
+
+  .result{margin-top:26px}
+  .empty{color:var(--ink2);font-size:13px;text-align:center;padding:40px 0}
+
+  .sec-title{font-size:13px;letter-spacing:2px;color:var(--gold);margin:26px 0 12px;
+    padding-bottom:6px;border-bottom:1px solid var(--line);font-weight:600}
+  .sec-title:first-child{margin-top:0}
+
+  .pillars{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  .pcard{border:1px solid var(--line);border-radius:10px;padding:14px 12px;text-align:center;background:#fdfcf9}
+  .pcard .lab{font-size:11px;color:var(--ink2);letter-spacing:2px}
+  .pcard .gz{font-family:Georgia,"Songti SC",serif;font-size:32px;letter-spacing:3px;margin:6px 0 4px;color:var(--ink)}
+  .pcard .gz .z{color:var(--accent)}
+  .pcard .ss{font-size:12px;color:var(--gold)}
+  .pcard .sub{font-size:11px;color:var(--ink2);margin-top:6px;line-height:1.7}
+
+  .kv{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px 22px;font-size:13px}
+  .kv div{display:flex;gap:8px}
+  .kv div.wide{grid-column:1/-1}
+  .kv span:first-child{color:var(--ink2);min-width:64px;flex:none}
+
+  .bars{display:flex;flex-direction:column;gap:7px;margin-top:4px}
+  .bar{display:grid;grid-template-columns:26px 1fr 62px;align-items:center;gap:10px;font-size:12px}
+  .bar .track{height:9px;background:#eee9e0;border-radius:5px;overflow:hidden}
+  .bar .fill{height:100%;border-radius:5px}
+  .bar .val{text-align:right;color:var(--ink2);font-variant-numeric:tabular-nums}
+
+  .topics{display:flex;flex-wrap:wrap;gap:8px}
+  .topic{border:1px solid var(--line);border-radius:999px;padding:5px 13px;font-size:12.5px;background:#fdfcf9}
+  .topic b{font-weight:600;margin-left:5px}
+
+  .overall{display:flex;align-items:center;gap:16px;flex-wrap:wrap;
+    border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:8px;
+    padding:14px 18px;background:#fdfcf9}
+  .overall .lv{font-family:Georgia,serif;font-size:24px;letter-spacing:2px}
+
+  .rules{display:flex;flex-direction:column;gap:9px}
+  .rule{border:1px solid var(--line);border-radius:8px;padding:11px 14px;background:#fff;
+    display:grid;grid-template-columns:64px 1fr;gap:12px}
+  .rule .tag{font-size:12px;font-weight:600;text-align:center;border-radius:5px;padding:2px 0;
+    height:22px;line-height:18px;color:#fff;white-space:nowrap}
+  .rule .src{font-size:12px;color:var(--gold);letter-spacing:.3px}
+  .rule .txt{font-size:13.5px;color:var(--ink);margin-top:2px}
+  .rule .meta{font-size:11px;color:var(--ink2);margin-top:4px}
+
+  .gua{font-family:Georgia,"Songti SC",serif;font-size:15px}
+  .yao-table{font-size:13px;border-collapse:collapse;width:100%}
+  .yao-table th,.yao-table td{border-bottom:1px solid var(--line);padding:7px 8px;text-align:left}
+  .yao-table th{color:var(--ink2);font-weight:500;font-size:12px}
+  .shi{color:var(--accent);font-weight:600}
+  .dong{color:var(--gold)}
+
+  .wuge{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+  .wuge div{border:1px solid var(--line);border-radius:8px;padding:10px;text-align:center;background:#fdfcf9}
+  .wuge .n{font-family:Georgia,serif;font-size:24px}
+  .wuge .l{font-size:11px;color:var(--ink2)}
+
+  .cal{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+  .cal .wd{font-size:11px;color:var(--ink2);text-align:center;padding:2px 0;letter-spacing:1px}
+  .cal .d{border:1px solid var(--line);border-left:3px solid var(--mid);border-radius:6px;
+    padding:6px 7px;cursor:pointer;min-height:66px;transition:box-shadow .12s}
+  .cal .d:hover{box-shadow:0 2px 10px rgba(31,35,40,.12)}
+  .cal .d.sel{outline:2px solid var(--accent);outline-offset:1px}
+  .cal .d .dd{font-size:10.5px;color:var(--ink2);display:flex;justify-content:space-between;line-height:1.3}
+  .cal .d .gz{font-family:Georgia,"Songti SC",serif;font-size:15px;letter-spacing:1px;margin:2px 0 1px}
+  .cal .d .lv{font-size:11.5px;font-weight:600;letter-spacing:.5px}
+  .cal .d .ss{font-size:10px;color:var(--ink2);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .dist{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--ink2)}
+  .dist b{font-family:Georgia,serif;font-size:15px;margin-left:3px}
+
+  .ai-bar{display:flex;align-items:center;gap:12px;margin-top:14px;flex-wrap:wrap}
+  .btn.ai{background:#2f4f3f;padding:8px 18px;font-size:13px;letter-spacing:.5px}
+  .btn.ai:hover{background:#24402f}
+  .btn.ai:disabled{background:#9aa79e;cursor:default}
+  .ai-bar .hint{margin:0;flex:1;min-width:180px}
+  .ai-card{margin-top:12px;border:1px solid var(--line);border-radius:10px;background:#fff;padding:16px 18px}
+  .ai-head{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-size:11.5px;color:var(--ink2);
+    border-bottom:1px dashed var(--line);padding-bottom:10px;margin-bottom:12px}
+  .badge{background:#eef1ec;color:#2f4f3f;border-radius:999px;padding:2px 9px;font-size:11px}
+  .badge.on{background:#2f4f3f;color:#fff}
+  .vera{background:#eef4ef;color:#2d6a4f;border-radius:999px;padding:2px 9px;font-size:11px}
+  .vera.warn{background:#fbf0ee;color:#a4243b}
+  .ai-text{font-size:14px;line-height:1.95}
+  .ai-text h4{font-size:12.5px;letter-spacing:1.5px;color:var(--gold);margin:16px 0 6px;font-weight:600}
+  .ai-text h4:first-child{margin-top:0}
+  .ai-text p{margin:0 0 8px}
+  .ai-text .cite{font-size:10.5px;color:#4f6355;background:#eef2ee;border-radius:4px;
+    padding:1px 4px;margin-left:3px;letter-spacing:.3px;white-space:nowrap}
+  .ai-text .spec{color:#6b5b2a;background:#fdf9ee;border-left:3px solid #d8c48a;
+    padding:8px 12px;border-radius:0 6px 6px 0}
+  .spec-mark{font-size:11.5px;color:#8a6d1f;letter-spacing:1px;margin:14px 0 6px}
+  .ai-note{font-size:12px;color:#8a5a2b;background:#fdf7ef;border-radius:6px;padding:8px 11px;margin-bottom:10px}
+  .ai-problems{margin:10px 0 0;padding-left:18px;font-size:12px;color:var(--bad);line-height:1.8}
+  .ai-foot{font-size:11.5px;color:var(--ink2);margin-top:12px;border-top:1px dashed var(--line);padding-top:10px}
+  .ai-loading{font-size:12.5px;color:var(--ink2);margin-top:10px}
+
+  footer{margin-top:34px;padding-top:16px;border-top:1px solid var(--line);
+    font-size:12px;color:var(--ink2);line-height:1.8}
+  .err{color:var(--bad);font-size:13px;margin-top:12px}
+  @media(max-width:640px){
+    .pillars{grid-template-columns:repeat(2,1fr)}
+    .wuge{grid-template-columns:repeat(2,1fr)}
+    .wrap{padding:20px 14px 60px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>命理规则引擎<small>典籍吉凶规则的程序化整理</small></h1>
+    <div class="stats" id="stats">规则库加载中…</div>
+  </header>
+
+  <nav>
+    <button class="on" data-tab="liuri">日运</button>
+    <button data-tab="bazi">四柱八字</button>
+    <button data-tab="liuyao">六爻纳甲</button>
+    <button data-tab="meihua">梅花易数</button>
+    <button data-tab="zeri">择日</button>
+    <button data-tab="xingming">姓名五格</button>
+  </nav>
+
+  <div class="panel on" id="p-liuri">
+    <div class="form">
+      <div class="field"><label>出生日期</label><input type="date" id="r-date" value="1990-05-15"></div>
+      <div class="field"><label>出生时间</label><input type="time" id="r-time" value="10:30"></div>
+      <div class="field"><label>性别</label>
+        <select id="r-gender"><option>男</option><option>女</option></select>
+      </div>
+      <div class="field"><label>起始日期</label><input type="date" id="r-start"></div>
+      <div class="field"><label>看多少天</label>
+        <select id="r-days">
+          <option>7</option><option>14</option><option selected>30</option>
+          <option>60</option><option>90</option><option>365</option>
+        </select>
+      </div>
+      <button class="btn" onclick="runLiuri()">看运势</button>
+    </div>
+    <div class="hint">逐日把当天干支叠到命局上：日干对日主取十神，日支与四支论冲合，再参建除与黄道。点任意一天看当日明细与出处。</div>
+  </div>
+
+  <div class="panel" id="p-bazi">
+    <div class="form">
+      <div class="field"><label>出生日期</label><input type="date" id="b-date" value="1990-05-15"></div>
+      <div class="field"><label>出生时间</label><input type="time" id="b-time" value="10:30"></div>
+      <div class="field"><label>性别</label>
+        <select id="b-gender"><option>男</option><option>女</option></select>
+      </div>
+      <div class="field"><label>称呼（可选）</label><input type="text" id="b-name" placeholder="如：张某"></div>
+      <button class="btn" onclick="runBazi()">排盘</button>
+    </div>
+    <div class="hint">以立春换年、以节气换月；23:00 后按次日日柱（晚子时）。节气用天文黄经推算，交界前后约 15 分钟内出生者月柱可能存疑。</div>
+  </div>
+
+  <div class="panel" id="p-liuyao">
+    <div class="form">
+      <div class="field"><label>所问之事</label>
+        <select id="l-q">
+          <option>综合</option><option>求财</option><option>事业</option><option>考试</option>
+          <option>文书</option><option>婚姻</option><option>子女</option><option>健康</option>
+          <option>兄弟</option><option>出行</option>
+        </select>
+      </div>
+      <div class="field"><label>性别</label>
+        <select id="l-gender"><option>男</option><option>女</option></select>
+      </div>
+      <button class="btn" onclick="runLiuyao()">摇卦</button>
+    </div>
+    <div class="hint">三枚铜钱摇六次，自动装卦（八宫、世应、纳甲、六亲）。旺衰为月建日辰的简化判断。</div>
+  </div>
+
+  <div class="panel" id="p-meihua">
+    <div class="form">
+      <div class="field"><label>第一个数</label><input type="number" id="m-a" value="23" min="1"></div>
+      <div class="field"><label>第二个数</label><input type="number" id="m-b" value="17" min="1"></div>
+      <button class="btn" onclick="runMeihua()">起卦</button>
+    </div>
+    <div class="hint">报数起卦：前数除八取上卦，后数除八取下卦，两数之和除六取动爻。</div>
+  </div>
+
+  <div class="panel" id="p-zeri">
+    <div class="form">
+      <div class="field"><label>日期</label><input type="date" id="z-date" value="2026-11-09"></div>
+      <button class="btn" onclick="runZeri()">查日</button>
+    </div>
+    <div class="hint">建除十二神以月建为锚，月建以节气为界；黄道黑道为十二值神另一套系统，二者可冲突，故有「吉凶权衡」。</div>
+  </div>
+
+  <div class="panel" id="p-xingming">
+    <div class="form">
+      <div class="field"><label>姓名</label><input type="text" id="x-name" value="王伟"></div>
+      <div class="field"><label>姓的笔画</label><input type="text" id="x-surname" value="4" placeholder="复姓用逗号：5,10"></div>
+      <div class="field"><label>名的笔画</label><input type="text" id="x-given" value="11" placeholder="双名用逗号：3,4"></div>
+      <button class="btn" onclick="runXingming()">计算</button>
+    </div>
+    <div class="hint">笔画须用康熙字典口径（三点水算「水」四画、草字头算「艸」六画等）。本工具不内置笔画表，以免版本差异造成静默错误。</div>
+  </div>
+
+  <div class="result" id="result"><div class="empty">输入后点击按钮，结果会显示在这里</div></div>
+
+  <footer>
+    <b>性质说明：</b>本工具把中国传统命理文献中的「条件→结论」规则整理为可执行代码，属文化研究与娱乐用途。
+    命理典籍的吉凶判断建立在古代阴阳五行宇宙观之上，<b>不具科学预测效力</b>，不应作为医疗、婚姻、投资、职业等现实决策的依据。
+    每条结论均标注所出典籍，便于核对原文主张；规则化过程中的简化与取舍已在文档中说明。
+  </footer>
+</div>
+
+<script>
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const LEVEL_CLASS = {'大吉':'good','吉':'good','平':'mid','凶':'bad','大凶':'bad'};
+const LEVEL_BG = {
+  '大吉':{bg:'#e2f1e8',border:'#2d6a4f',fg:'#1d4d38'},
+  '吉'  :{bg:'#f0f7f2',border:'#5b9279',fg:'#2d6a4f'},
+  '平'  :{bg:'#faf8f3',border:'#c9c3b6',fg:'#6b7280'},
+  '凶'  :{bg:'#fbeeef',border:'#c4737f',fg:'#a4243b'},
+  '大凶':{bg:'#f5dde0',border:'#a4243b',fg:'#7d1b2c'}
+};
+let LIURI = null;
+
+document.querySelectorAll('nav button').forEach(b=>{
+  b.onclick = () => {
+    document.querySelectorAll('nav button').forEach(x=>x.classList.remove('on'));
+    document.querySelectorAll('.panel').forEach(x=>x.classList.remove('on'));
+    b.classList.add('on');
+    $('#p-'+b.dataset.tab).classList.add('on');
+  };
+});
+
+async function post(url, body){
+  const r = await fetch(url,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
+  const j = await r.json();
+  if(j.error) throw new Error(j.error);
+  return j;
+}
+
+function showError(e){
+  $('#result').innerHTML = '<div class="err">出错了：'+esc(e.message)+'</div>';
+}
+
+let CUR = {kind:'', payload:null};
+let LLM_STATUS = {configured:false};
+
+function aiHint(){
+  if(LLM_STATUS.configured){
+    return `当前模型 ${esc(LLM_STATUS.provider)} · ${esc(LLM_STATUS.model)}；只解释已命中的规则，逐句标注出处`;
+  }
+  return '未配置大模型，将使用本地模板（同样逐条标注出处，可离线运行）';
+}
+
+function aiBar(kind, day, outId){
+  const d = day ? `'${day}'` : 'null';
+  return `<div class="ai-bar">
+    <button class="btn ai" onclick="runAi('${kind}',${d},'${outId}',this)">AI 解读</button>
+    <span class="hint">${aiHint()}</span>
+    <div id="${outId}" style="flex-basis:100%"></div>
+  </div>`;
+}
+
+function inlineCite(s){
+  return esc(s).replace(/\[([A-Za-z]{2,6}-\d{1,3})\]/g,
+    '&nbsp;<span class="cite" title="规则编号，可在下方命中条目中核对">$1</span>');
+}
+
+function renderNarrative(text){
+  let html = '', spec = false;
+  for(const raw of String(text||'').split(/\n+/)){
+    const line = raw.trim();
+    if(!line) continue;
+    if(line.startsWith('【模型推断】')){
+      spec = true;
+      html += '<div class="spec-mark">模型推断 · 非典籍结论，已被隔离</div>';
+      const rest = line.slice(6).trim();
+      if(rest) html += `<p class="spec">${inlineCite(rest)}</p>`;
+      continue;
+    }
+    if(line.startsWith('## ')){
+      html += `<h4>${esc(line.slice(3))}</h4>`;
+      continue;
+    }
+    html += `<p class="${spec?'spec':''}">${inlineCite(line)}</p>`;
+  }
+  return html;
+}
+
+function aiHtml(r){
+  const v = r.verification || {ok:false, problems:['校验结果缺失']};
+  const src = r.online ? `${esc(r.provider)} · ${esc(r.model)}` : '本地模板';
+  let h = `<div class="ai-card">
+    <div class="ai-head">
+      <span class="badge ${r.online?'on':''}">${src}</span>
+      <span>${r.mode==='exploratory'?'探索式':'严格模式'}</span>
+      <span>${r.elapsed_ms} ms</span>
+      <span class="vera ${v.ok?'':'warn'}">${esc(r.verification_text||'')}</span>
+    </div>`;
+  if(r.fallback_reason) h += `<div class="ai-note">${esc(r.fallback_reason)}</div>`;
+  h += `<div class="ai-text">${renderNarrative(r.text)}</div>`;
+  if(!v.ok && (v.problems||[]).length){
+    h += '<ul class="ai-problems">' + v.problems.map(p=>`<li>${esc(p)}</li>`).join('') + '</ul>';
+  }
+  h += `<div class="ai-foot">${esc(r.disclaimer||'')}</div></div>`;
+  return h;
+}
+
+async function runAi(kind, day, outId, btn){
+  const box = document.getElementById(outId);
+  if(!box) return;
+  if(btn){ btn.disabled = true; btn.textContent = '生成中…'; }
+  box.innerHTML = '<div class="ai-loading">正在生成解读…</div>';
+  try{
+    const payload = Object.assign({}, CUR.payload || {}, {kind:kind, day:day||null});
+    box.innerHTML = aiHtml(await post('/api/narrate', payload));
+  }catch(e){
+    box.innerHTML = '<div class="err">解读失败：'+esc(e.message)+'</div>';
+  }finally{
+    if(btn){ btn.disabled = false; btn.textContent = 'AI 解读'; }
+  }
+}
+
+function ruleCard(h){
+  const t = h.then;
+  const vd = t.verdict === '中性' ? '平' : t.verdict;
+  const cls = LEVEL_CLASS[vd] || 'mid';
+  const color = cls==='good'?'var(--good)':cls==='bad'?'var(--bad)':'var(--mid)';
+  return `<div class="rule">
+    <div class="tag" style="background:${color}">${esc(vd)}${t.score>0?'+':''}${t.score}</div>
+    <div>
+      <div class="src">${esc(h.book)}${h.section?' · '+esc(h.section):''}</div>
+      <div class="txt">${esc(t.text)}</div>
+      <div class="meta">${esc(h.title)}　置信度 ${esc(h.confidence||'-')}${h.note?'　'+esc(h.note):''}</div>
+    </div>
+  </div>`;
+}
+
+function topicChips(topics){
+  const keys = Object.keys(topics);
+  if(!keys.length) return '<div class="topic">无命中</div>';
+  return keys.map(k=>{
+    const v = topics[k];
+    const cls = LEVEL_CLASS[v.level] || 'mid';
+    const color = cls==='good'?'var(--good)':cls==='bad'?'var(--bad)':'var(--mid)';
+    return `<div class="topic">${esc(k)}<b style="color:${color}">${esc(v.level)} ${v.score>0?'+':''}${v.score}</b></div>`;
+  }).join('');
+}
+
+function overallBox(o){
+  const cls = LEVEL_CLASS[o.level] || 'mid';
+  const color = cls==='good'?'var(--good)':cls==='bad'?'var(--bad)':'var(--mid)';
+  return `<div class="overall">
+    <div class="lv" style="color:${color}">${esc(o.level)}</div>
+    <div style="font-size:12.5px;color:var(--ink2);line-height:1.7">
+      命中 ${o.hit_count} 条规则　均分 ${o.avg_score>0?'+':''}${o.avg_score}　可参考度 ${esc(o.confidence)}<br>
+      ${esc(o.note)}
+    </div>
+  </div>`;
+}
+
+function bars(scores){
+  const colors = {'木':'#4f7d4a','火':'#b4472f','土':'#a8762a','金':'#8a8f98','水':'#3b6b8f'};
+  return '<div class="bars">' + Object.entries(scores).map(([k,v])=>{
+    return `<div class="bar"><span>${k}</span>
+      <div class="track"><div class="fill" style="width:${Math.min(100,v)}%;background:${colors[k]}"></div></div>
+      <span class="val">${v.toFixed(1)}%</span></div>`;
+  }).join('') + '</div>';
+}
+
+function renderBazi(r){
+  const s = r.summary, labels=['年柱','月柱','日柱','时柱'];
+  let h = '<div class="sec-title">四柱排盘</div><div class="pillars">';
+  for(let i=0;i<4;i++){
+    h += `<div class="pcard">
+      <div class="lab">${labels[i]}</div>
+      <div class="gz"><span>${esc(s.pillars[i][0])}</span><span class="z">${esc(s.pillars[i][1])}</span></div>
+      <div class="ss">${esc(s.ten_gods_stems[i])}</div>
+      <div class="sub">藏干 ${esc((s.canggan[i]||[]).join(' '))}<br>纳音 ${esc(s.nayin[i])}<br>长生 ${esc(s.changsheng[i])}</div>
+    </div>`;
+  }
+  h += '</div>';
+
+  h += '<div class="sec-title">命局</div><div class="kv">';
+  h += `<div><span>出生</span><span>${esc(s.birth)}（${esc(s.gender)}）</span></div>`;
+  h += `<div><span>月令</span><span>${esc(s.month_jie)} · 交节 ${esc((s.jie_time||'').slice(5))}</span></div>`;
+  h += `<div><span>日主</span><span>${esc(s.day_master)}（${esc(s.day_master_element)}）</span></div>`;
+  h += `<div><span>强弱</span><span>${esc(s.strength.level)}，同类占比 ${s.strength.support_ratio}</span></div>`;
+  h += `<div><span>格局</span><span>${esc(s.pattern)}</span></div>`;
+  h += `<div><span>空亡</span><span>${esc((s.kongwang||[]).join(' '))}</span></div>`;
+  const t = s.tiaohou||{};
+  h += `<div class="wide"><span>调候</span><span>${esc((t.use||[]).join('/')||'—')}　命中 ${esc((t.hit||[]).map(x=>x.gan+'('+x.rank+')').join('、')||'无')}</span></div>`;
+  const rel = Object.entries(s.relations||{}).filter(([k,v])=>v.length).map(([k,v])=>k+v.join('')).join('；');
+  h += `<div><span>刑冲合害</span><span>${esc(rel||'无')}</span></div>`;
+  h += `<div class="wide"><span>神煞</span><span>${esc((s.shensha||[]).map(x=>x.name).join('、')||'无')}</span></div>`;
+  h += `<div class="wide"><span>大运</span><span>${esc((s.dayun||[]).map(d=>d.ganzhi+'('+d.start_age+')').join(' '))}</span></div>`;
+  h += '</div>';
+
+  h += '<div class="sec-title">五行力量（藏干加权估算）</div>' + bars(s.element_scores);
+  h += '<div class="sec-title">规则判定</div>' + overallBox(r.overall);
+  h += '<div class="topics" style="margin-top:12px">' + topicChips(r.topics) + '</div>';
+  h += '<div class="sec-title">大模型解读</div>' + aiBar('bazi', null, 'ai-out-bazi');
+  h += '<div class="sec-title">命中条目 · 典籍溯源</div><div class="rules">' + r.hits.map(ruleCard).join('') + '</div>';
+  return h;
+}
+
+function renderLiuyao(r){
+  const s = r.summary;
+  let h = '<div class="sec-title">卦象</div><div class="kv">';
+  h += `<div><span>所问</span><span>${esc(s.question)}</span></div>`;
+  h += `<div><span>主卦</span><span class="gua">${esc(s.name)}（${esc(s.gua)}）</span></div>`;
+  h += `<div><span>变卦</span><span class="gua">${esc(s.bian_name)}</span></div>`;
+  h += `<div><span>卦宫</span><span>${esc(s.gong)}宫 · ${esc(s.gong_wuxing)}</span></div>`;
+  h += `<div><span>世应</span><span>世${s.shi}爻　应${s.ying}爻　${esc(s.type)}</span></div>`;
+  h += `<div><span>月建</span><span>${esc(s.month_zhi)}　日辰 ${esc(s.day_ganzhi)}</span></div>`;
+  h += `<div><span>用神</span><span>${esc(s.yongshen)}（${esc(s.yongshen_state)}）</span></div>`;
+  h += `<div><span>世爻</span><span>${esc(s.shi_state)}</span></div>`;
+  h += '</div>';
+
+  h += '<div class="sec-title">装卦</div><table class="yao-table"><tr><th>爻位</th><th>阴阳</th><th>六亲</th><th>纳甲</th><th>标记</th></tr>';
+  [...s.yao].reverse().forEach(y=>{
+    const mark = (y.shi?'<span class="shi">世</span> ':'') + (y.ying?'<span class="shi">应</span> ':'') +
+                 (y.dong?'<span class="dong">动 → '+esc(y.bian_zhi||'')+'</span>':'');
+    h += `<tr><td>${y.pos}爻</td><td>${esc(y.yin_yang)}</td><td>${esc(y.liuqin)}</td>
+      <td>${esc(y.zhi)}${esc(y.wuxing)}</td><td>${mark}</td></tr>`;
+  });
+  h += '</table>';
+
+  h += '<div class="sec-title">规则判定</div>' + overallBox(r.overall);
+  h += '<div class="topics" style="margin-top:12px">' + topicChips(r.topics) + '</div>';
+  h += '<div class="sec-title">命中条目 · 典籍溯源</div><div class="rules">' + r.hits.map(ruleCard).join('') + '</div>';
+  return h;
+}
+
+function renderMeihua(r){
+  const s = r.summary;
+  let h = '<div class="sec-title">卦象</div><div class="kv">';
+  h += `<div><span>报数</span><span>${s.num_a} / ${s.num_b}</span></div>`;
+  h += `<div><span>本卦</span><span class="gua">${esc(s.ben_gua)}</span></div>`;
+  h += `<div><span>互卦</span><span class="gua">${esc(s.hu_gua)}</span></div>`;
+  h += `<div><span>变卦</span><span class="gua">${esc(s.bian_gua)}</span></div>`;
+  h += `<div><span>动爻</span><span>第 ${s.dong_yao} 爻</span></div>`;
+  h += `<div><span>体卦</span><span>${esc(s.ti)}（${esc(s.ti_wuxing)}）</span></div>`;
+  h += `<div><span>用卦</span><span>${esc(s.yong)}（${esc(s.yong_wuxing)}）</span></div>`;
+  h += `<div><span>体用</span><span>${esc(s.tiyong)}</span></div>`;
+  h += `<div><span>过程</span><span>${s.hu_sheng_ti?'互卦生体':'互卦不生体'}</span></div>`;
+  h += `<div><span>结果</span><span>${s.bian_sheng_ti?'变卦生体':'变卦不生体'}${s.bian_ke_ti?'（且克体）':''}</span></div>`;
+  h += '</div>';
+  h += '<div class="sec-title">规则判定</div>' + overallBox(r.overall);
+  h += '<div class="topics" style="margin-top:12px">' + topicChips(r.topics) + '</div>';
+  h += '<div class="sec-title">命中条目 · 典籍溯源</div><div class="rules">' + r.hits.map(ruleCard).join('') + '</div>';
+  return h;
+}
+
+function renderZeri(r){
+  const s = r.summary;
+  let h = '<div class="sec-title">日辰</div><div class="kv">';
+  h += `<div><span>公历</span><span>${esc(s.date)}</span></div>`;
+  h += `<div><span>日干支</span><span>${esc(s.day_ganzhi)}</span></div>`;
+  h += `<div><span>月建</span><span>${esc(s.month_zhi)}月 · ${esc(s.month_jie)} ${esc((s.jie_time||'').slice(5))}</span></div>`;
+  h += `<div><span>建除</span><span>${esc(s.jianchu)}日（${esc(s.jianchu_jixiong)}）</span></div>`;
+  h += `<div><span>值神</span><span>${esc(s.zhishen)}（${s.huangdao?'黄道':'黑道'}）</span></div>`;
+  h += `<div><span>所宜</span><span>${esc(s.yi)}</span></div>`;
+  h += '</div>';
+  h += '<div class="sec-title">规则判定</div>' + overallBox(r.overall);
+  h += '<div class="topics" style="margin-top:12px">' + topicChips(r.topics) + '</div>';
+  h += '<div class="sec-title">命中条目 · 典籍溯源</div><div class="rules">' + r.hits.map(ruleCard).join('') + '</div>';
+  return h;
+}
+
+function renderXingming(r){
+  const s = r.summary;
+  let h = '<div class="sec-title">五格</div><div class="wuge">';
+  for(const [k,v] of Object.entries(s.wuge)){
+    h += `<div><div class="l">${esc(k)}</div><div class="n">${v.num}</div>
+      <div class="l">${esc(v.wuxing)} · ${esc(v.jixiong)}</div></div>`;
+  }
+  h += '</div>';
+  h += '<div class="sec-title">三才</div><div class="kv">';
+  h += `<div><span>三才</span><span>${esc(s.sancai_combo)}　${esc(s.sancai)}</span></div>`;
+  h += '</div>';
+  h += '<div class="sec-title">规则判定</div>' + overallBox(r.overall);
+  h += '<div class="topics" style="margin-top:12px">' + topicChips(r.topics) + '</div>';
+  h += '<div class="sec-title">命中条目 · 典籍溯源</div><div class="rules">' + r.hits.map(ruleCard).join('') + '</div>';
+  return h;
+}
+
+function calHtml(days){
+  const wd = ['一','二','三','四','五','六','日'];
+  let h = wd.map(x=>`<div class="wd">${x}</div>`).join('');
+  if(!days.length) return h;
+  const d0 = new Date(days[0].date+'T00:00:00');
+  const pad = (d0.getDay()+6)%7;
+  for(let i=0;i<pad;i++) h += '<div></div>';
+  days.forEach((d,i)=>{
+    const c = LEVEL_BG[d.level] || LEVEL_BG['平'];
+    const tag = d.shensha.length ? d.shensha[0]
+              : (d.chong.length ? '冲'+d.chong.join('') : d.jianchu+'日');
+    h += `<div class="d" data-i="${i}" onclick="pickDay(${i})"
+        style="background:${c.bg};border-left-color:${c.border}">
+      <div class="dd"><span>${d.date.slice(5).replace('-','/')}</span><span>${esc(d.weekday)}</span></div>
+      <div class="gz">${esc(d.ganzhi)}</div>
+      <div class="lv" style="color:${c.fg}">${esc(d.level)} ${d.score>0?'+':''}${d.score}</div>
+      <div class="ss">${esc(tag)}</div>
+    </div>`;
+  });
+  return h;
+}
+
+function pickDay(i){
+  const d = LIURI.days[i];
+  if(!d) return;
+  document.querySelectorAll('#cal .d').forEach(el=>el.classList.toggle('sel', +el.dataset.i===i));
+  const c = LEVEL_BG[d.level] || LEVEL_BG['平'];
+  let h = `<div class="sec-title">${d.date} 星期${esc(d.weekday)} · ${esc(d.ganzhi)}日</div>`;
+  h += '<div class="kv">';
+  h += `<div><span>十神</span><span>${esc(d.ten_god)}</span></div>`;
+  h += `<div><span>建除</span><span>${esc(d.jianchu)}日</span></div>`;
+  h += `<div><span>值神</span><span>${esc(d.zhishen)} · ${d.huangdao?'黄道':'黑道'}</span></div>`;
+  h += `<div><span>神煞</span><span>${esc(d.shensha.join('、')||'无')}</span></div>`;
+  h += `<div><span>相冲</span><span>${esc(d.chong.join('、')||'无')}</span></div>`;
+  h += `<div><span>相合</span><span>${esc(d.he.join('、')||'无')}</span></div>`;
+  h += '</div>';
+  h += `<div class="overall" style="margin-top:14px;border-left-color:${c.border}">
+    <div class="lv" style="color:${c.fg}">${esc(d.level)}</div>
+    <div style="font-size:12.5px;color:var(--ink2);line-height:1.7">
+      合计 ${d.score>0?'+':''}${d.score} 分　命中 ${d.hit_count} 条<br>
+      分数为下列各条规则得分之和，非概率，也不代表事件发生几率。
+    </div></div>`;
+  h += '<div class="rules" style="margin-top:12px">' + d.hits.map(ruleCard).join('') + '</div>';
+  h += aiBar('liuri', d.date, 'ai-out-day');
+  $('#daydetail').innerHTML = h;
+}
+
+function renderLiuri(r){
+  LIURI = r;
+  const s = r.summary;
+  let h = '<div class="sec-title">命主</div><div class="kv">';
+  h += `<div><span>四柱</span><span>${esc(s.pillars.join('　'))}</span></div>`;
+  h += `<div><span>日主</span><span>${esc(s.day_master)}（${esc(s.day_master_element)}）　${esc(s.strength)}</span></div>`;
+  h += `<div><span>格局</span><span>${esc(s.pattern)}</span></div>`;
+  h += `<div><span>大运</span><span>${esc(s.dayun||'未起运')}</span></div>`;
+  h += `<div><span>流年</span><span>${esc(s.liunian)}（${esc(s.liunian_ten_god)}）</span></div>`;
+  h += `<div><span>区间</span><span>${esc(s.start)} 起 ${s.days} 天</span></div>`;
+  h += '</div>';
+
+  h += '<div class="sec-title">大模型解读</div>' + aiBar('liuri', null, 'ai-out-liuri');
+
+  if(r.background && r.background.length){
+    h += '<div class="sec-title">运势背景 · 整段区间不变，不计入逐日评分</div><div class="rules">';
+    h += r.background.map(b=>{
+      const vd = b.verdict==='中性'?'平':b.verdict;
+      const col = LEVEL_CLASS[vd]==='good'?'var(--good)':LEVEL_CLASS[vd]==='bad'?'var(--bad)':'var(--mid)';
+      return `<div class="rule" style="grid-template-columns:52px 1fr">
+        <div class="tag" style="background:${col}">${esc(vd)}</div>
+        <div><div class="src">${esc(b.book)}</div><div class="txt">${esc(b.text)}</div></div></div>`;
+    }).join('');
+    h += '</div>';
+  }
+
+  const dist = r.distribution;
+  h += '<div class="sec-title">逐日</div><div class="dist">';
+  for(const k of ['大吉','吉','平','凶','大凶']){
+    h += `<span>${k}<b style="color:${LEVEL_BG[k].fg}">${dist[k]||0}</b></span>`;
+  }
+  if(r.best.length && r.worst.length){
+    h += `<span style="margin-left:auto">最宜 ${esc(r.best[0].date.slice(5))}（${r.best[0].score>0?'+':''}${r.best[0].score}）
+      　最忌 ${esc(r.worst[0].date.slice(5))}（${r.worst[0].score>0?'+':''}${r.worst[0].score}）</span>`;
+  }
+  h += '</div>';
+  h += '<div class="cal" id="cal" style="margin-top:10px">' + calHtml(r.days) + '</div>';
+  h += '<div id="daydetail"><div class="empty">点日历中任意一天，查看当日明细与典籍出处</div></div>';
+  return h;
+}
+
+function render(r){
+  const map = {bazi:renderBazi, liuyao:renderLiuyao, meihua:renderMeihua,
+               zeri:renderZeri, xingming:renderXingming, liuri:renderLiuri};
+  $('#result').innerHTML = (map[r.kind]||(()=>''))(r);
+}
+
+async function runBazi(){
+  const payload = {date:$('#b-date').value,time:$('#b-time').value,
+    gender:$('#b-gender').value,name:$('#b-name').value};
+  CUR = {kind:'bazi', payload:payload};
+  try{ render(await post('/api/bazi', payload)); }catch(e){ showError(e); }
+}
+async function runLiuyao(){
+  const payload = {question:$('#l-q').value,gender:$('#l-gender').value,
+    seed:Math.floor(Math.random()*1e9)};
+  CUR = {kind:'liuyao', payload:payload};
+  try{ render(await post('/api/liuyao', payload)); }catch(e){ showError(e); }
+}
+async function runMeihua(){
+  const payload = {a:+$('#m-a').value,b:+$('#m-b').value};
+  CUR = {kind:'meihua', payload:payload};
+  try{ render(await post('/api/meihua', payload)); }catch(e){ showError(e); }
+}
+async function runZeri(){
+  const payload = {date:$('#z-date').value};
+  CUR = {kind:'zeri', payload:payload};
+  try{ render(await post('/api/zeri', payload)); }catch(e){ showError(e); }
+}
+async function runXingming(){
+  const payload = {name:$('#x-name').value,
+    surname:$('#x-surname').value,given:$('#x-given').value};
+  CUR = {kind:'xingming', payload:payload};
+  try{ render(await post('/api/xingming', payload)); }catch(e){ showError(e); }
+}
+async function runLiuri(){
+  const payload = {date:$('#r-date').value, time:$('#r-time').value,
+    gender:$('#r-gender').value, start:$('#r-start').value, days:+$('#r-days').value};
+  CUR = {kind:'liuri', payload:payload};
+  try{ render(await post('/api/liuri', payload)); }catch(e){ showError(e); }
+}
+
+fetch('/api/llm/status').then(r=>r.json()).then(s=>{
+  LLM_STATUS = s;
+  const label = s.configured ? `大模型 ${esc(s.model)}` : '大模型未配置';
+  const el = document.getElementById('llm-status');
+  if(el) el.textContent = label;
+}).catch(()=>{});
+
+fetch('/api/stats').then(r=>r.json()).then(s=>{
+  $('#stats').innerHTML = `共 <b>${s.total_rules}</b> 条规则 · 覆盖 <b>${s.total_books}</b> 部典籍<br>
+    <span style="font-size:11px">八字 ${s.by_system.bazi||0} · 流日 ${s.by_system.liuri||0} · 六爻 ${s.by_system.liuyao} · 梅花 ${s.by_system.meihua} · 择日 ${s.by_system.zeri} · 姓名 ${s.by_system.xingming} · 紫微 ${s.by_system.ziwei||0}　<span id="llm-status"></span></span>`;
+  return fetch('/api/llm/status').then(r=>r.json());
+}).then(s=>{
+  if(!s) return;
+  LLM_STATUS = s;
+  const el = document.getElementById('llm-status');
+  if(el) el.textContent = s.configured ? `· 大模型 ${s.model}` : '· 大模型未配置';
+}).catch(()=>{ $('#stats').textContent = '规则库未连接'; });
+
+const _now = new Date();
+$('#r-start').value = `${_now.getFullYear()}-${String(_now.getMonth()+1).padStart(2,'0')}-${String(_now.getDate()).padStart(2,'0')}`;
+runLiuri();
+</script>
+</body>
+</html>

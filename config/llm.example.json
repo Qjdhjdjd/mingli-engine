@@ -1,0 +1,10 @@
+{
+  "_说明": "把本文件复制为 config/llm.json 后填写。也可用环境变量，二者等价，环境变量优先。",
+  "provider": "deepseek",
+  "base_url": "https://api.deepseek.com/v1",
+  "api_key": "sk-在此填入你的 Key",
+  "model": "deepseek-chat",
+  "temperature": 0.4,
+  "max_tokens": 1400,
+  "timeout": 60
+}

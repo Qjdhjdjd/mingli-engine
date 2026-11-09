@@ -1,0 +1,604 @@
+{
+  "system": "liuri",
+  "description": "流日运势规则库：以「某日干支 vs 命局」的比对为条件，判当日吉凶倾向。",
+  "rules": [
+    {
+      "id": "LR-01",
+      "system": "liuri",
+      "book": "渊海子平",
+      "section": "论十神",
+      "title": "流日正官",
+      "when": {
+        "lr_ten_god": "正官"
+      },
+      "then": {
+        "topic": "事业",
+        "verdict": "吉",
+        "score": 2,
+        "text": "官星值日。古谓「官者，禄也」，主名分有归、公务顺遂，宜见长者、宜办正事。"
+      },
+      "confidence": "A"
+    },
+    {
+      "id": "LR-02",
+      "system": "liuri",
+      "book": "三命通会",
+      "section": "论七杀",
+      "title": "流日七杀",
+      "when": {
+        "lr_ten_god": "七杀"
+      },
+      "then": {
+        "topic": "事业",
+        "verdict": "凶",
+        "score": -2,
+        "text": "杀星值日。七杀主压力与突发之制，古谓「有制为偏官，无制为七杀」，宜守成、忌冒进。"
+      },
+      "confidence": "A"
+    },
+    {
+      "id": "LR-03",
+      "system": "liuri",
+      "book": "渊海子平",
+      "section": "论财",
+      "title": "流日正财",
+      "when": {
+        "lr_ten_god": "正财"
+      },
+      "then": {
+        "topic": "财运",
+        "verdict": "吉",
+        "score": 2,
+        "text": "财星值日，且为正财。主财物有进、交易可成，利收账、议价、置办实用之物。"
+      },
+      "confidence": "A"
+    },
+    {
+      "id": "LR-04",
+      "system": "liuri",
+      "book": "渊海子平",
+      "section": "论财",
+      "title": "流日偏财",
+      "when": {
+        "lr_ten_god": "偏财"
+      },
+      "then": {
+        "topic": "财运",
+        "verdict": "吉",
+        "score": 1,
+        "text": "偏财值日。主意外之财与四方之利，亦主应酬花费随之而来，来去皆快。"
+      },
+      "confidence": "A"
+    },
+    {
+      "id": "LR-05",
+      "system": "liuri",
+      "book": "三命通会",
+      "section": "论食神",
+      "title": "流日食神",
+      "when": {
+        "lr_ten_god": "食神"
+      },
+      "then": {
+        "topic": "综合",
+        "verdict": "吉",
+        "score": 2,
+        "text": "食神值日。古称「福星」，主口福宴乐、心神宽泰，宜饮食、宜会友、宜调养。"
+      },
+      "confidence": "A"
+    },
+    {
+      "id": "LR-06",
+      "system": "liuri",
+      "book": "渊海子平",
+      "section": "论伤官",
+      "title": "流日伤官",
+      "when": {
+        "lr_ten_god": "伤官"
+      },
+      "then": {
+        "topic": "人际",
+        "verdict": "凶",
+        "score": -1,
+        "text": "伤官值日。伤官主才气外露而陵上，古谓「伤官见官为祸百端」，此日易起口舌，言语宜收敛。"
+      },
+      "confidence": "A"
+    },
+    {
+      "id": "LR-07",
+      "system": "liuri",
+      "book": "渊海子平",
+      "section": "论印",
+      "title": "流日正印",
+      "when": {
+        "lr_ten_god": "正印"
+      },
+      "then": {
+        "topic": "文书",
+        "verdict": "吉",
+        "score": 2,
+        "text": "印星值日。印主庇荫与凭据，利文书、契约、学业、见长辈，遇事多得援手。"
+      },
+      "confidence": "A"
+    },
+    {
+      "id": "LR-08",
+      "system": "liuri",
+      "book": "三命通会",
+      "section": "论枭神",
+      "title": "流日偏印",
+      "when": {
+        "lr_ten_god": "偏印"
+      },
+      "then": {
+        "topic": "文书",
+        "verdict": "凶",
+        "score": -1,
+        "text": "枭神值日。偏印又名枭，主谋划迂回、事多反复，古谓「枭神夺食」，此日不宜决断大事。"
+      },
+      "confidence": "A"
+    },
+    {
+      "id": "LR-09",
+      "system": "liuri",
+      "book": "渊海子平",
+      "section": "论比劫",
+      "title": "流日比肩",
+      "when": {
+        "lr_ten_god": "比肩"
+      },
+      "then": {
+        "topic": "人际",
+        "verdict": "平",
+        "score": 0,
+        "text": "比肩值日。主同侪往还、朋辈相聚，亦主分财，吉凶两平，视所问之事而定。"
+      },
+      "confidence": "A"
+    },
+    {
+      "id": "LR-10",
+      "system": "liuri",
+      "book": "三命通会",
+      "section": "论劫财",
+      "title": "流日劫财",
+      "when": {
+        "lr_ten_god": "劫财"
+      },
+      "then": {
+        "topic": "财运",
+        "verdict": "凶",
+        "score": -1,
+        "text": "劫财值日。主分夺，古谓「劫财者，夺我之财」，此日防破耗、防借贷、防替人担保。"
+      },
+      "confidence": "A"
+    },
+    {
+      "id": "LR-11",
+      "system": "liuri",
+      "book": "三命通会",
+      "section": "论冲",
+      "title": "流日冲日支",
+      "when": {
+        "lr_in": {
+          "field": "lr_chong",
+          "value": "日"
+        }
+      },
+      "then": {
+        "topic": "综合",
+        "verdict": "凶",
+        "score": -2,
+        "text": "流日冲日支。日支为身宫所寄，冲则动摇，主动荡、变卦、行止不宁。大事宜改期。"
+      },
+      "confidence": "A"
+    },
+    {
+      "id": "LR-12",
+      "system": "liuri",
+      "book": "三命通会",
+      "section": "论冲",
+      "title": "流日冲月支",
+      "when": {
+        "lr_in": {
+          "field": "lr_chong",
+          "value": "月"
+        }
+      },
+      "then": {
+        "topic": "事业",
+        "verdict": "凶",
+        "score": -2,
+        "text": "流日冲提纲。月支为命局之提纲，古法视冲提最为吃重，主环境变动、上下不安。"
+      },
+      "confidence": "A"
+    },
+    {
+      "id": "LR-13",
+      "system": "liuri",
+      "book": "三命通会",
+      "section": "论冲",
+      "title": "流日冲年支",
+      "when": {
+        "lr_in": {
+          "field": "lr_chong",
+          "value": "年"
+        }
+      },
+      "then": {
+        "topic": "六亲",
+        "verdict": "凶",
+        "score": -1,
+        "text": "流日冲年支。年支主根基与长辈，此日宜问候尊长，远行宜慎。"
+      },
+      "confidence": "A"
+    },
+    {
+      "id": "LR-14",
+      "system": "liuri",
+      "book": "三命通会",
+      "section": "论冲",
+      "title": "流日冲时支",
+      "when": {
+        "lr_in": {
+          "field": "lr_chong",
+          "value": "时"
+        }
+      },
+      "then": {
+        "topic": "六亲",
+        "verdict": "凶",
+        "score": -1,
+        "text": "流日冲时支。时支主子女与晚景，亦主谋划之落实处，此日易生枝节。"
+      },
+      "confidence": "A"
+    },
+    {
+      "id": "LR-15",
+      "system": "liuri",
+      "book": "三命通会",
+      "section": "论六合",
+      "title": "流日合日支",
+      "when": {
+        "lr_in": {
+          "field": "lr_he",
+          "value": "日"
+        }
+      },
+      "then": {
+        "topic": "综合",
+        "verdict": "吉",
+        "score": 1,
+        "text": "流日与日支六合。合主和顺、主聚、主成，此日宜议、宜约、宜会。"
+      },
+      "confidence": "A"
+    },
+    {
+      "id": "LR-16",
+      "system": "liuri",
+      "book": "三命通会",
+      "section": "论六合",
+      "title": "流日合月支",
+      "when": {
+        "lr_in": {
+          "field": "lr_he",
+          "value": "月"
+        }
+      },
+      "then": {
+        "topic": "事业",
+        "verdict": "吉",
+        "score": 1,
+        "text": "流日与提纲六合。主环境相谐、上下相通，宜请示、宜协作。"
+      },
+      "confidence": "A"
+    },
+    {
+      "id": "LR-17",
+      "system": "liuri",
+      "book": "神峰通考",
+      "section": "论伏吟",
+      "title": "流日伏吟",
+      "when": {
+        "lr_not_empty": "lr_fuyin"
+      },
+      "then": {
+        "topic": "综合",
+        "verdict": "凶",
+        "score": -1,
+        "text": "流日与命局某柱干支全同，是为伏吟。伏吟主呻吟、主迟滞，事有重复之象。"
+      },
+      "confidence": "B"
+    },
+    {
+      "id": "LR-18",
+      "system": "liuri",
+      "book": "三命通会",
+      "section": "论反吟",
+      "title": "流日反吟",
+      "when": {
+        "lr_not_empty": "lr_fanyin"
+      },
+      "then": {
+        "topic": "综合",
+        "verdict": "凶",
+        "score": -3,
+        "text": "流日与命局某柱天克地冲，是为反吟。古法以反吟为重，主反复、主冲击，此日不宜远行与签约。"
+      },
+      "confidence": "B"
+    },
+    {
+      "id": "LR-19",
+      "system": "liuri",
+      "book": "三命通会",
+      "section": "论害",
+      "title": "流日相害",
+      "when": {
+        "lr_not_empty": "lr_hai"
+      },
+      "then": {
+        "topic": "人际",
+        "verdict": "凶",
+        "score": -1,
+        "text": "流日与命局某支相害。害主阴损、主暗中生隙，此日防小人、防误会。"
+      },
+      "confidence": "B"
+    },
+    {
+      "id": "LR-20",
+      "system": "liuri",
+      "book": "渊海子平",
+      "section": "论三合",
+      "title": "流日凑成三合局",
+      "when": {
+        "lr_sanhe": true
+      },
+      "then": {
+        "topic": "综合",
+        "verdict": "吉",
+        "score": 1,
+        "text": "流日支与命局两支凑成三合局。合局则气聚，主此日人事物易于汇合、推进得势。"
+      },
+      "confidence": "A"
+    },
+    {
+      "id": "LR-21",
+      "system": "liuri",
+      "book": "三命通会",
+      "section": "论空亡",
+      "title": "流日落空亡",
+      "when": {
+        "lr_kong": true
+      },
+      "then": {
+        "topic": "综合",
+        "verdict": "凶",
+        "score": -1,
+        "text": "流日之地支落于本命旬空。古谓「空亡者，有名无实」，此日事多虚耗、约而不至。"
+      },
+      "confidence": "B"
+    },
+    {
+      "id": "LR-22",
+      "system": "liuri",
+      "book": "协纪辨方书",
+      "section": "建除十二神",
+      "title": "建除吉日",
+      "when": {
+        "lr_jianchu": [
+          "成",
+          "开",
+          "定"
+        ]
+      },
+      "then": {
+        "topic": "日课",
+        "verdict": "吉",
+        "score": 1,
+        "text": "建除为成、开、定之日。成主成就、开主开通、定主安定，三者皆古法所许之吉日。"
+      },
+      "confidence": "A"
+    },
+    {
+      "id": "LR-23",
+      "system": "liuri",
+      "book": "协纪辨方书",
+      "section": "建除十二神",
+      "title": "建除凶日",
+      "when": {
+        "lr_jianchu": [
+          "破",
+          "危",
+          "闭"
+        ]
+      },
+      "then": {
+        "topic": "日课",
+        "verdict": "凶",
+        "score": -1,
+        "text": "建除为破、危、闭之日。破主耗损、危主险、闭主不通，宜守不宜举。"
+      },
+      "confidence": "A"
+    },
+    {
+      "id": "LR-24",
+      "system": "liuri",
+      "book": "协纪辨方书",
+      "section": "黄道黑道",
+      "title": "黄道日",
+      "when": {
+        "lr_huangdao": true
+      },
+      "then": {
+        "topic": "日课",
+        "verdict": "吉",
+        "score": 1,
+        "text": "当日值神属黄道六神（青龙、明堂、金匮、天德、玉堂、司命），日课为吉。"
+      },
+      "confidence": "A"
+    },
+    {
+      "id": "LR-25",
+      "system": "liuri",
+      "book": "渊海子平",
+      "section": "论神煞",
+      "title": "流日值天乙贵人",
+      "when": {
+        "lr_shensha": "天乙贵人"
+      },
+      "then": {
+        "topic": "贵人",
+        "verdict": "吉",
+        "score": 2,
+        "text": "当日地支为本命天乙贵人。古谓「天乙者，尊神也」，此日求人、面试、陈情最宜。"
+      },
+      "confidence": "A"
+    },
+    {
+      "id": "LR-26",
+      "system": "liuri",
+      "book": "星平会海",
+      "section": "论驿马",
+      "title": "流日值驿马",
+      "when": {
+        "lr_shensha": "驿马"
+      },
+      "then": {
+        "topic": "出行",
+        "verdict": "平",
+        "score": 0,
+        "text": "当日地支为本命驿马。主奔波、迁动、出行，吉凶视所问之事，动则得机、静则生烦。"
+      },
+      "confidence": "A"
+    },
+    {
+      "id": "LR-27",
+      "system": "liuri",
+      "book": "星平会海",
+      "section": "论桃花",
+      "title": "流日值桃花",
+      "when": {
+        "lr_shensha": "桃花"
+      },
+      "then": {
+        "topic": "人际",
+        "verdict": "平",
+        "score": 0,
+        "text": "当日地支为本命桃花。主人缘、情事、应酬，宜社交而不宜轻诺。"
+      },
+      "confidence": "A"
+    },
+    {
+      "id": "LR-28",
+      "system": "liuri",
+      "book": "渊海子平",
+      "section": "论羊刃",
+      "title": "流日值羊刃",
+      "when": {
+        "lr_shensha": "羊刃"
+      },
+      "then": {
+        "topic": "健康",
+        "verdict": "凶",
+        "score": -1,
+        "text": "当日地支为本命羊刃。古谓「羊刃者，刚烈之物」，此日防争竞、防刃伤、忌逞强。"
+      },
+      "confidence": "A"
+    },
+    {
+      "id": "LR-29",
+      "system": "liuri",
+      "book": "渊海子平",
+      "section": "论禄",
+      "title": "流日值禄神",
+      "when": {
+        "lr_shensha": "禄神"
+      },
+      "then": {
+        "topic": "财运",
+        "verdict": "吉",
+        "score": 1,
+        "text": "当日地支为本命禄神。禄主养命之源，此日利求财、利议薪、利自立之事。"
+      },
+      "confidence": "A"
+    },
+    {
+      "id": "LR-30",
+      "system": "liuri",
+      "book": "渊海子平",
+      "section": "论文昌",
+      "title": "流日值文昌",
+      "when": {
+        "lr_shensha": "文昌"
+      },
+      "then": {
+        "topic": "文书",
+        "verdict": "吉",
+        "score": 1,
+        "text": "当日地支为本命文昌。利文书、考试、面试、签约，宜动笔、宜陈述。"
+      },
+      "confidence": "A"
+    },
+    {
+      "id": "LR-31",
+      "system": "liuri",
+      "book": "子平真诠",
+      "section": "论大运",
+      "title": "大运逢财",
+      "when": {
+        "lr_dayun_ten_god": [
+          "正财",
+          "偏财"
+        ]
+      },
+      "then": {
+        "topic": "财运",
+        "verdict": "吉",
+        "score": 1,
+        "text": "所处大运为财星。运为十年之环境，日运之吉凶须以运势为背景，财运之中求财较易得手。"
+      },
+      "confidence": "A",
+      "background": true
+    },
+    {
+      "id": "LR-32",
+      "system": "liuri",
+      "book": "子平真诠",
+      "section": "论大运",
+      "title": "大运逢杀",
+      "when": {
+        "lr_dayun_ten_god": [
+          "七杀"
+        ]
+      },
+      "then": {
+        "topic": "事业",
+        "verdict": "凶",
+        "score": -1,
+        "text": "所处大运为七杀。十年之中压力常在，日运遇杀则叠，此日尤宜持重。"
+      },
+      "confidence": "A",
+      "background": true
+    },
+    {
+      "id": "LR-33",
+      "system": "liuri",
+      "book": "三命通会",
+      "section": "论岁运",
+      "title": "流年冲日支",
+      "when": {
+        "lr_in": {
+          "field": "lr_liunian_chong",
+          "value": "日"
+        }
+      },
+      "then": {
+        "topic": "综合",
+        "verdict": "凶",
+        "score": -1,
+        "text": "所在流年冲日支。岁冲身宫，一年之中变动之事偏多，日运遇此背景不宜再添新举。"
+      },
+      "confidence": "A",
+      "background": true
+    }
+  ]
+}
